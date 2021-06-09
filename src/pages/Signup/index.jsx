@@ -8,11 +8,13 @@ const SignupForm = () => {
   const renderFormElement = (name, placeholder) => <Form.Field><label>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>;
   //signup schema is a metter of discussion
   const [userInfo , setUserInfo] = useState({
+    name: "",
     email: "",
     password: "",
+    institution: ""
   });
 
-  const history = useHistory();
+  // const history = useHistory();
   const setInfo = (e) => {
     setUserInfo({
         ...userInfo,
@@ -21,14 +23,16 @@ const SignupForm = () => {
   }
 
   const sendData = async () => {
-    const { email, password } = userInfo;
+    const { email, password, name, institution } = userInfo;
     const userData = {
         password,
-        email
+        email,
+        name,
+        institution
     }
     var response = await Axios.post('http://localhost:5000/login', userData)
     console.log(response);
-    history.push('/dashboard')
+    // history.push('/dashboard')
   }
 
   return(

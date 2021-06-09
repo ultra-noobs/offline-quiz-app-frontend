@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react'
 
 const FrontPage = ()=>{
     return (
-        <div className="frontPage">
+        <div className="frontpage">
             <div className="frontpage__tagline">
                 <div className="frontpage__tagline__text">
                 <h1>{content.content[0].frontPage.TagLine1}</h1>
