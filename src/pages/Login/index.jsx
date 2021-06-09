@@ -1,22 +1,43 @@
-import React from 'react'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
+import { React, useState } from 'react'
+import { Button, Form } from 'semantic-ui-react'
+import Axios from 'axios';
+import { useHistory } from "react-router-dom";
 
-const LoginForm = () => (
-  <Form>
-    <Form.Field>
-      <label>First Name</label>
-      <input placeholder='First Name' />
-    </Form.Field>
-    <Form.Field>
-      <label>Last Name</label>
-      <input placeholder='Last Name' />
-    </Form.Field>
-    <Form.Field>
-      <Checkbox label='I agree to the Terms and Conditions' />
-    </Form.Field>
-    <Button type='submit'>Submit</Button>
-  </Form>
-)
+const LoginForm = () => {
+
+  const [userInfo , setUserInfo] = useState({
+    email: "",
+    password: "",
+  });
+
+  const history = useHistory();
+  const setInfo = (e) => {
+    setUserInfo({
+        ...userInfo,
+        [e.target.name]: e.target.value  
+    })
+  }
+
+  const sendData = async () => {
+    const { email, password } = userInfo;
+    const userData = {
+        password,
+        email
+    }
+    console.log(userData);
+    var response = await Axios.post('http://localhost:5000/login', userData)
+    console.log(response);
+    // history.push('/dashboard')
+  }
+
+  const formElements = [{ name: "email", placeholder: "Enter your email" },{name: "password", placeholder: "Enter password"}];
+  const renderFormElement = (name, placeholder) => <Form.Field><label>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
+
+  return (
+  <Form> 
+    {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
+    <Button type='submit' onClick={() => sendData()}>Submit</Button> 
+  </Form>) 
+    };
 
 export default LoginForm;
