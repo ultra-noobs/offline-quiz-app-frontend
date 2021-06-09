@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Container } from 'semantic-ui-react'
 import Axios from 'axios';
 import { useHistory } from "react-router-dom";
 
@@ -34,10 +34,13 @@ const LoginForm = () => {
   const renderFormElement = (name, placeholder) => <Form.Field><label>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
 
   return (
-  <Form> 
-    {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
-    <Button type='submit' onClick={() => sendData()}>Submit</Button> 
-  </Form>) 
+    <Container>
+       <Form> 
+         {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
+         <Button type='submit' onClick={() => sendData()}>Login</Button> 
+        </Form>
+    </Container>
+  ) 
     };
 
 export default LoginForm;

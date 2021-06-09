@@ -3,7 +3,24 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-size: 40px;
+    width: 80%;
+    margin: auto;
+
+    &__tagline {
+        width: 60%;
+
+         &__text > h1 {
+             font-size: 40px;
+         }
+
+         &__text > p {
+             font-size: 20px;
+         }
+    }
+
+    &__img {
+        width: 40%;
+    }
 }
 .frontPageImg{
     height: 500px;
