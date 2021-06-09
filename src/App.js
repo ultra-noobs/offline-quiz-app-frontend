@@ -1,5 +1,4 @@
-import Navbar from "./components/nav/navbar.jsx";
-import FrontPage from "./pages/frontPage/frontPage.jsx"
+import FrontPage from "./pages/frontPage/index.jsx"
 import Login from './pages/Login/index'
 import Register from './pages/Signup/index'
 import Layout from './components/Layout'
@@ -11,16 +10,15 @@ import React from 'react'
 const App = () => {
   return(
     <div>
+      <Router>
       <Layout>
-        <Router>
-          <Navbar />
           <Switch>
             <Route exact path="/"><FrontPage/></Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
           </Switch>
-        </Router>
       </Layout>
+      </Router>
     </div>
   );
 }
