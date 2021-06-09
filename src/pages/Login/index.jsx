@@ -1,10 +1,13 @@
 import { React, useState } from 'react'
-import { Button, Form, Container } from 'semantic-ui-react'
+import { Button, Form, Container, Message, Header } from 'semantic-ui-react'
 import Axios from 'axios';
 import { useHistory } from "react-router-dom";
+import './Login.scss'
 
 const LoginForm = () => {
 
+  const labelStyle = { fontSize: "15px" }
+  const [errMessage, seterrMessage ] = useState('');
   const [userInfo , setUserInfo] = useState({
     email: "",
     password: "",
@@ -25,19 +28,24 @@ const LoginForm = () => {
         email
     }
     console.log(userData);
-    var response = await Axios.post('http://localhost:5000/login', userData)
-    console.log(response);
-    // history.push('/dashboard')
+    try {
+      var response = await Axios.post('http://localhost:5000/login', userData)
+    } catch(err) {
+      seterrMessage(err);
+    }
+    history.push('/dashboard')
   }
 
   const formElements = [{ name: "email", placeholder: "Enter your email" },{name: "password", placeholder: "Enter password"}];
-  const renderFormElement = (name, placeholder) => <Form.Field><label>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
+  const renderFormElement = (name, placeholder) => <Form.Field><label className="label" style={labelStyle}>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
 
   return (
     <Container>
-       <Form> 
+       <Header as='h1'>Login</Header>
+       <Form error={!!errMessage}>  
          {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
-         <Button type='submit' onClick={() => sendData()}>Login</Button> 
+         <Button type='submit' onClick={() => sendData()}>Login</Button>
+         <Message error header="Oops!!" content={errMessage} /> 
         </Form>
     </Container>
   ) 

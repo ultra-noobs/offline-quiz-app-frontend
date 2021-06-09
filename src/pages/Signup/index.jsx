@@ -1,12 +1,15 @@
 import { React, useState } from 'react'
-import { Button, Form, Container } from 'semantic-ui-react'
+import { Button, Form, Container, Message, Header } from 'semantic-ui-react'
 import Axios from 'axios';
 import { useHistory } from "react-router-dom";
+import './Signup.scss'
 
 const SignupForm = () => {
+  const labelStyle = { fontSize: "15px" };
   const formElements = [{ name: "name", placeholder: "Enter your name" },{name: "email", placeholder: "Enter your email"}, {name: "institution", placeholder: "Enter your institution"}, {name: "password", placeholder: "Set password"}, {name: "re-password", placeholder: "Re renter the password"}];
-  const renderFormElement = (name, placeholder) => <Form.Field><label>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>;
-  //signup schema is a metter of discussion
+  const renderFormElement = (name, placeholder) => <Form.Field><label style={labelStyle} className="label">{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>;
+
+  const [errMessage, seterrMessage] = useState('');
   const [userInfo , setUserInfo] = useState({
     name: "",
     email: "",
@@ -14,7 +17,7 @@ const SignupForm = () => {
     institution: ""
   });
 
-  // const history = useHistory();
+  const history = useHistory();
   const setInfo = (e) => {
     setUserInfo({
         ...userInfo,
@@ -30,19 +33,24 @@ const SignupForm = () => {
         name,
         institution
     }
-    var response = await Axios.post('http://localhost:5000/login', userData)
-    console.log(response);
-    // history.push('/dashboard')
+    try {
+    var response = await Axios.post('http://localhost:5000/login', userData);
+    history.push('/dashboard')
+    } catch(err) {
+      seterrMessage(err);
+    }
   }
 
   return(
     <Container>
-       <Form> 
+       <Header as='h1'>Register</Header>
+       <Form error={!!errMessage} > 
          {formElements.map((ele, index) => renderFormElement(ele.name, ele.placeholder))}  
          <Button type='submit' onClick={() => sendData()}>Register</Button>  
+         <Message error header="Oops!!" content={errMessage} />
       </Form>
     </Container>
  )
-  };
+};
 
 export default SignupForm;
