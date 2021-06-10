@@ -3,6 +3,7 @@ import Login from './pages/Login/index'
 import Register from './pages/Signup/index'
 import Dashboard from './pages/Dashboard/index'
 import Create from './pages/Dashboard/Create/index'
+import FormRegisteration from './pages/Dashboard/Form/index'
 import View from './pages/Dashboard/View/index'
 import Header from './components/Navigation/index'
 import Profile from './pages/Dashboard/Profile/index'
@@ -25,6 +26,7 @@ const App = () => {
             <Route exact path="/dashboard/create" component={Create} />
             <Route exact path="/dashboard/profile" component={Profile} />
             <Route exact path="/dashboard/view/:id" component={View} />
+            <Route exact path="/formRegister/:id/:id2" component={FormRegisteration} />
           </Switch>
       </Router>
     </div>

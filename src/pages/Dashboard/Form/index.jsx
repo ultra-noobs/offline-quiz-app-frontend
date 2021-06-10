@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { Container, Form, Button } from 'semantic-ui-react'
 
-const Form  = () => {
+const FormRegisteration  = () => {
 
     const [useData, setUserData ] = useState({name: '', id: '', phno: ''})
 
@@ -27,4 +27,4 @@ const Form  = () => {
     );
 }
 
-export default Form;
+export default FormRegisteration;
