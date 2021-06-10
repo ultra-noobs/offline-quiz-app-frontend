@@ -3,34 +3,40 @@ import './Create.scss'
 import { Icon, Button, Container, Header, Form } from 'semantic-ui-react'
 
 const Create = () => {
-    const [questionCount, setquestionCount] = useState(0);
-    const [questionsInput, setquestionsInput] = useState([]);
-    const [questions, setQuestions] = useState({question: '', options: ''})
+    
+    const [ questionCount, setquestionCount ] = useState(0);
+    const [ questionsInput, setquestionsInput ] = useState([]);
+    const [ questionAndAnswers, setquestionAndAnswers ] = useState([{ question:'', answer: '' }]);
+
     const incrementAndRender = () => {
         questionsInput.push(questionCount);
-        console.log(questionsArr);
         setquestionCount(questionCount + 1);
     }
-    const updateQuestions = (e) => {
-        // this will be called when save is clicked 
-        // setQuestions(...questions, { question: e.target.value, options: e.target.value });
-    };
-    const renderQuestionInput = () => questionsArr.map((ele, index) =>  
+
+    const renderQuestionInput = () => questionsInput.map((ele, index) =>  
     <Form.Field>
         <label>Question: {ele}</label>
-        <input placeholder="Enter your question" name={"question" + ele } onChange={(e) => updateQuestions(e)} />
-        <label> Input for Question {ele} options</label>
-        <input placeholder="Comma seperated options" name={"option" + ele } onChange={(e) => updateQuestions(e)} />
+        <input placeholder="Enter your question" name={"question" + ele } id={"question"}/>
+        <label> Add answer for question {ele} </label>
+        <input placeholder="a)answer1 b)answer2 c)answer3" name={"options" + ele } id={"answer"} />
     </Form.Field>);
+
+    const saveAndParse = () => {
+        let questions = document.querySelectorAll("#question");
+        let answers = document.querySelectorAll("#answer");
+        let i=0;
+        questions.forEach((ele) => {
+            questionAndAnswers.push({ question: ele.value, answer: answers[i].value })
+            i++;
+        });
+    }
 
     const buttonStyle = { marginTop: "10px" }
     return(
         <div>
             <Container>
-                <Header> Add Questions here <Button primary floated="right"> <Icon name='save' onClick={updateQuestions()} /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
-                <Form>
-                 {renderQuestionInput()}
-                </Form>
+                <Header> Add Questions here <Button primary floated="right" onClick={() => saveAndParse()} > <Icon name='save' /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
+                <Form> {renderQuestionInput()} </Form>
                 <Button icon style={buttonStyle} labelPosition='left' floated="right" onClick={() => incrementAndRender()}>
                     <Icon name='add' />
                   Add
