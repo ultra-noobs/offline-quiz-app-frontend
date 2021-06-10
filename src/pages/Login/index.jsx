@@ -5,6 +5,7 @@ import { useHistory,Redirect } from "react-router-dom";
 import './Login.scss'
 import useAuthStatus from "../../utils/customHooks/user";
 import useToken from "../../utils/customHooks/token";
+import Navbar from "../../components/Navigation/index"
 
 const LoginForm = () => {
 
@@ -66,6 +67,7 @@ const LoginForm = () => {
       {!isLoading && auth && <Redirect to='/dashboard' />}
       {!isLoading && !auth && 
         <div>
+          <Navbar />
           <Header as='h1'>Login</Header>
           <Form error={!!errMessage}>  
             {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
