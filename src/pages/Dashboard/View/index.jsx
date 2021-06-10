@@ -99,7 +99,6 @@ const renderQuestions = () => myQuestions.map((element, index)=>
 
 const View = () => {
     return(
-        <Hamburgermenu>
         <Container>
             <h2 className="heading">Quiz 1 for batch XXXX<Button floated="right">Circulate</Button> </h2>
             <Divider/>
@@ -108,7 +107,6 @@ const View = () => {
             <Question question="Which tool can you use to ensure code quality?" options={options[2]} /> */}
             {renderQuestions()}
         </Container>
-        </Hamburgermenu>
     );
 }
 

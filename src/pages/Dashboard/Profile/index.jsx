@@ -22,7 +22,7 @@ const Profile = () => {
   const [userInfo,setUserInfo] = useState({email:'',institute:'',name:''})
   const [userReq, setUserReq] = useState({
     loading: true,
-    user: null
+    user: false
   })
   const { getToken } = useToken();
   const saveBatchInfo = async() => {
