@@ -38,7 +38,11 @@ const Create = () => {
         const token = getToken();
         const response = await Axios.post(
             'http://localhost:5000/dashboard/saveQuiz', 
-            questionAndAnswers,
+            {
+                questionAndAnswers,
+                time:quizDateAndTime.time,
+                date:quizDateAndTime.date
+            },
             {
                 headers: {
                 Authorization: token,

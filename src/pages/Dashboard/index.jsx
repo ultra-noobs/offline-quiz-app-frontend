@@ -34,7 +34,7 @@ const Dashboard = () => {
     <div className="container">
       {isLoading && <div>Loading...</div>}
       {!isLoading && !auth && <Redirect to='/login' />}
-      {!isLoading && auth &&
+      {!isLoading && auth && 
         <Grid columns={1}>
           <Grid.Column>
             <Button icon primary onClick={() => setVisible(true)}>
