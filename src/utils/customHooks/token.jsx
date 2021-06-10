@@ -4,6 +4,7 @@ const useToken = () =>{
         return token;
     }
     const setToken = (token) =>{
+        console.log(token);
         localStorage.setItem("token",token);
     }
     const removeToken = ()=>{

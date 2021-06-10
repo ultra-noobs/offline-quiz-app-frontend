@@ -7,37 +7,22 @@ import {
 import Card from "../../components/Card/index";
 import { NavLink, Redirect } from "react-router-dom";
 import useAuthStatus from "../../utils/customHooks/user";
-import useToken from "../../utils/customHooks/token";
 import HamburgerMenu from "../../components/HamburgerMenu/index";
 import Loader from '../../components/Loader/index'
 import Axios from 'axios'
 
 const Dashboard = () => {
 
-  const { setToken } = useToken();
   const { getStatus } = useAuthStatus();
   var [isLoading, setLoading] = useState(true);
   var [auth, setAuth] = useState();
 
-  useEffect(async () => {
+  useEffect(() => {
     const checkStatus = async () => {
       const isAuthenticated = await getStatus();
       setAuth(isAuthenticated);
       setLoading(false);
     };
-
-    const token = setToken();
-
-    // const quizes = await Axios.get(
-    //   'http://localhost:5000/dashboard',{
-    //     headers: {
-    //       Authorization: token,
-    //       },
-    //   }
-    // );
-    
-    // console.log(quizes);
-
     checkStatus();
   }, []);
 

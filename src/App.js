@@ -26,7 +26,7 @@ const App = () => {
             <Route exact path="/dashboard/create" component={Create} />
             <Route exact path="/dashboard/profile" component={Profile} />
             <Route exact path="/dashboard/view/:id" component={View} />
-            <Route exact path="/formRegister/:id/:id2" component={FormRegisteration} />
+            <Route exact path="/formRegister/:token/:batch" component={FormRegisteration} />
           </Switch>
       </Router>
     </div>
