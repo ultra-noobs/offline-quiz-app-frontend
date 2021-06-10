@@ -5,6 +5,7 @@ import { useHistory,Redirect } from "react-router-dom";
 import './Signup.scss'
 import useToken from "../../utils/customHooks/token";
 import useAuthStatus from "../../utils/customHooks/user";
+import Navbar from "../../components/Navigation/index"
 
 const SignupForm = () => {
   const labelStyle = { fontSize: "15px" };
@@ -71,6 +72,7 @@ const SignupForm = () => {
       {!isLoading && auth && <Redirect to='/dashboard' />}
       {!isLoading && !auth && 
       <div>
+        <Navbar />
         <Header as='h1'>Register</Header>
         <Form error={!!errMessage} > 
           {formElements.map((ele, index) => renderFormElement(ele.name, ele.placeholder))}  
