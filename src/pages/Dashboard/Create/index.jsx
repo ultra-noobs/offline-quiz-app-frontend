@@ -1,75 +1,41 @@
-import { React, useState, useRef, useEffect } from "react"
+import { React, useState } from "react"
 import './Create.scss'
 import { Icon, Button, Container, Header, Form } from 'semantic-ui-react'
 
 const Create = () => {
     
-    // var optionCount = new Array(100);
-    // // for(let i=0;i<100;i++) {
-    //     // optionCount[i] = new Array(100);
-    // // }
+    const [ questionCount, setquestionCount ] = useState(0);
+    const [ questionsInput, setquestionsInput ] = useState([]);
+    const [ questionAndAnswers, setquestionAndAnswers ] = useState([{ question:'', answer: '' }]);
 
-    // var optionInput = new Array(100);
-    // for(let i=0;i<100;i++) {
-    //     optionInput[i] = new Array(100);
-    // }
-
-    let currentQuestionIndex = 0;
-    const inputRef = useRef(null); 
-    const [questionCount, setquestionCount] = useState(0);
-    const [questionsInput, setquestionsInput] = useState([]);
-    const [ optionCount, setOptionCount ] = useState(0);
-    const [ optionInput, setOptionInput ] = useState([100][100]);
-
-    // useEffect(() => {
-    //     for(let i=0;i<100;i++) {
-    //         optionCount[i] = 0;
-    //     }
-    // },[])
-    
     const incrementAndRender = () => {
         questionsInput.push(questionCount);
         setquestionCount(questionCount + 1);
-        setOptionCount(0);
-        if(currentQuestionIndex != 0)
-        optionInput[currentQuestionIndex+1].push(optionCount);
     }
-
-    const incrementAndRenderOption = (index) => {
-        optionInput[index].push(optionCount);
-        setOptionCount(optionCount + 1);
-        currentQuestionIndex = index;
-    };
-
-    const updateQuestions = (e) => {
-        console.log(inputRef.current.value);
-        // this will be called when save is clicked 
-        // setQuestions(...questions, { question: e.target.value, options: e.target.value });
-    };
-
-    const renderOptionInput = (index) => optionInput[index].map((ele, index) =>
-    <Form.Field>
-        <label>Option {ele} </label>
-        <input placeholder={"Enter option " + ele} />
-    </Form.Field> );
 
     const renderQuestionInput = () => questionsInput.map((ele, index) =>  
     <Form.Field>
         <label>Question: {ele}</label>
-        <input placeholder="Enter your question" ref={inputRef} name={"question" + ele } onChange={(e) => updateQuestions(e)} />
-        <label> Input for Question {ele} options</label>
-        {renderOptionInput(ele)}
-        <Button icon style={buttonStyle} labelPosition="left" floated="left" onClick={() => incrementAndRenderOption(ele)}>
-            <Icon name="add" />
-            Option 
-        </Button>
+        <input placeholder="Enter your question" name={"question" + ele } id={"question"}/>
+        <label> Add answer for question {ele} </label>
+        <input placeholder="a)answer1 b)answer2 c)answer3" name={"options" + ele } id={"answer"} />
     </Form.Field>);
+
+    const saveAndParse = () => {
+        let questions = document.querySelectorAll("#question");
+        let answers = document.querySelectorAll("#answer");
+        let i=0;
+        questions.forEach((ele) => {
+            questionAndAnswers.push({ question: ele.value, answer: answers[i].value })
+            i++;
+        });
+    }
 
     const buttonStyle = { marginTop: "10px" }
     return(
         <div>
             <Container>
-                <Header> Add Questions here <Button primary floated="right"> <Icon name='save' onClick={() => updateQuestions()} /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
+                <Header> Add Questions here <Button primary floated="right" onClick={() => saveAndParse()} > <Icon name='save' /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
                 <Form> {renderQuestionInput()} </Form>
                 <Button icon style={buttonStyle} labelPosition='left' floated="right" onClick={() => incrementAndRender()}>
                     <Icon name='add' />
