@@ -61,10 +61,12 @@ const Dashboard = () => {
                 </Menu.Item>
                 </NavLink>
 
+                <NavLink exact activeClassName="current" to={`/dashboard/profile`}>
                 <Menu.Item as='a'>
                   <Icon name='gamepad' />
                 Profile
               </Menu.Item>
+              </NavLink>
                 <Menu.Item as='a'>
                   <Icon name='camera' />
                 About
