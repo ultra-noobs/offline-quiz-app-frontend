@@ -3,6 +3,7 @@ import './Create.scss'
 import { Icon, Button, Container, Header, Form } from 'semantic-ui-react'
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
+import HamburgerMenu from '../../../components/HamburgerMenu/index'
 
 const Create = () => {
     
@@ -63,6 +64,7 @@ const Create = () => {
     const buttonStyle = { marginTop: "10px" }
     return(
         <div>
+            <HamburgerMenu>
             <Container>
                 <Header> Add Questions here <Button primary floated="right" onClick={() => saveAndParse()} > <Icon name='save' /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
                 <Form>
@@ -76,6 +78,7 @@ const Create = () => {
                   Add
                 </Button>
             </Container>
+            </HamburgerMenu>
         </div>
     );
 }
