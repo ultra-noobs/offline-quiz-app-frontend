@@ -1,19 +1,25 @@
 import React from "react"
 import "./Question.scss"
-import {Container} from 'semantic-ui-react'
+import {Container,Divider} from 'semantic-ui-react'
 
-const Question = () => {
-    <Container>
-            <div>
-                Which of the following options is the most appropriate?
+
+const Question = (props) => {
+
+    const renderOptions = () => props.options.map((element,key)=>
+        <div className="options">
+            {String.fromCharCode(key+65)}. {element}
+        </div>
+    )
+
+    return (
+        <div>
+            <div className="question">
+                Q{props.index}) {props.question}
             </div>
-            <div>
-                <div>A. Option A</div>
-                <div>B. Option B</div>
-                <div>C. Option C</div>
-                <div>D. Option D</div>
-            </div>
-    </Container>
+            {renderOptions()}
+            <Divider/>
+        </div>
+    )
 }
 
 export default Question;
