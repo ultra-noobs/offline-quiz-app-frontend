@@ -15,25 +15,33 @@ import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
 import HamburgerMenu from '../../../components/HamburgerMenu/index'
 
-const items = [
-  {
-    header: "Teacher name",
-    description: "Designation",
-  },
-];
-
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const [batchInfo, setBatchInfo] = useState([{}]);
   const [currentInfo, setCurrentInfo] = useState({ gmail: '', batchno: '' })
+  const [userInfo,setUserInfo] = useState({email:'',institute:'',name:''})
   const [userReq, setUserReq] = useState({
     loading: true,
     user: null
   })
   const { getToken } = useToken();
-  const saveBatchInfo = () => {
+  const saveBatchInfo = async() => {
     setOpen(false);
     batchInfo.push(currentInfo);
+    try {
+      const token = getToken();
+      const response = await Axios.post(
+        "http://localhost:5000/profile/setbatch",
+        currentInfo,
+        {
+          headers:{
+              Authorization: token,
+          }
+        }
+      )
+    } catch (error) {
+      
+    }
     setCurrentInfo({
       gmail: '',
       batchno: ''
@@ -60,6 +68,7 @@ const Profile = () => {
             },
           }
         )
+        setUserInfo({name:response.data.name,email:response.data.email,institute:response.data.institution});
         setUserReq({ loading: false, user: true })
       } catch (error) {
         console.log(error);
@@ -71,17 +80,17 @@ const Profile = () => {
 
   return (
     <div>
-      {userReq.isLoading && <div>Loading...</div>}
-      {!userReq.isLoading && !userReq.user && <Redirect to="/login"></Redirect>}
-      {!userReq.isLoading && userReq.user &&
+      {userReq.loading && <div>Loading...</div>}
+      {!userReq.loading && !userReq.user && <Redirect to="/login"></Redirect>}
+      {!userReq.loading && userReq.user &&
         <HamburgerMenu>
           <div className="profile__page">
             <div className="profile__page__info">
               <Grid columns={1}>
                 <Grid.Column>
-                  <Card.Group centered items={items} />
-                  <Header as="h3">Email: this is the user test emil</Header>
-                  <Header as="h3">School: this is the user test school</Header>
+                  <Header as="h3">Name: {userInfo.name}</Header>
+                  <Header as="h3">Email: {userInfo.email}</Header>
+                  <Header as="h3">Institute : {userInfo.institute}</Header>
                 </Grid.Column>
               </Grid>
             </div>
