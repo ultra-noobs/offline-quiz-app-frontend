@@ -54,10 +54,13 @@ const Dashboard = () => {
                 visible={visible}
                 width='thin'
               >
-                <Menu.Item as='a'>
-                  <Icon name='home' />
-                Create
-              </Menu.Item>
+                <NavLink exact activeClassName="current" to={`/dashboard/create`}>
+                  <Menu.Item as='a'>
+                    <Icon name='home' />
+                    Create
+                </Menu.Item>
+                </NavLink>
+
                 <Menu.Item as='a'>
                   <Icon name='gamepad' />
                 Profile
