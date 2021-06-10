@@ -9,7 +9,7 @@ import useAuthStatus from "../../utils/customHooks/user";
 const SignupForm = () => {
   const labelStyle = { fontSize: "15px" };
   const formElements = [{ name: "name", placeholder: "Enter your name" },{name: "email", placeholder: "Enter your email"}, {name: "institution", placeholder: "Enter your institution"}, {name: "password", placeholder: "Set password"}, {name: "re-password", placeholder: "Re renter the password"}];
-  const renderFormElement = (name, placeholder) => <Form.Field><label style={labelStyle} className="label">{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>;
+  const renderFormElement = (name, placeholder) => <Form.Field><label style={labelStyle} className="label">{name}</label><input type={name} name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>;
 
   const [errMessage, seterrMessage] = useState('');
   const [userInfo , setUserInfo] = useState({

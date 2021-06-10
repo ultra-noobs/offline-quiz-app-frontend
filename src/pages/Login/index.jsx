@@ -58,7 +58,7 @@ const LoginForm = () => {
   }
 
   const formElements = [{ name: "email", placeholder: "Enter your email" },{name: "password", placeholder: "Enter password"}];
-  const renderFormElement = (name, placeholder) => <Form.Field><label className="label" style={labelStyle}>{name}</label><input name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
+  const renderFormElement = (name, placeholder) => <Form.Field><label className="label" style={labelStyle}>{name}</label><input type={name} name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
 
   return (
     <Container>

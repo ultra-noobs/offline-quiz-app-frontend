@@ -7,6 +7,7 @@ const Create = () => {
     const [ questionCount, setquestionCount ] = useState(0);
     const [ questionsInput, setquestionsInput ] = useState([]);
     const [ questionAndAnswers, setquestionAndAnswers ] = useState([{ question:'', answer: '' }]);
+    const [ quizDateAndTime, setQuizDateAndTime ] = useState({date: '', time: ''})
 
     const incrementAndRender = () => {
         questionsInput.push(questionCount);
@@ -31,12 +32,25 @@ const Create = () => {
         });
     }
 
+    const setDateAndTime = (e) => {
+        setQuizDateAndTime({
+            ...quizDateAndTime,
+            [e.target.name]: e.target.value
+        });
+        console.log(quizDateAndTime);
+    };
+ 
     const buttonStyle = { marginTop: "10px" }
     return(
         <div>
             <Container>
                 <Header> Add Questions here <Button primary floated="right" onClick={() => saveAndParse()} > <Icon name='save' /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
-                <Form> {renderQuestionInput()} </Form>
+                <Form>
+                    <label>Enter quiz timing </label>
+                    <input style={buttonStyle} name="date" onChange={(e) => setDateAndTime(e)} type="date"></input>
+                    <input style={buttonStyle} name="time" onChange={(e) => setDateAndTime(e)} type="time"></input> 
+                    {renderQuestionInput()}
+                </Form>
                 <Button icon style={buttonStyle} labelPosition='left' floated="right" onClick={() => incrementAndRender()}>
                     <Icon name='add' />
                   Add
