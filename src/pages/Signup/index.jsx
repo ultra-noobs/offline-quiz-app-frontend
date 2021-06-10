@@ -6,6 +6,7 @@ import './Signup.scss'
 import useToken from "../../utils/customHooks/token";
 import useAuthStatus from "../../utils/customHooks/user";
 import Navbar from "../../components/Navigation/index"
+import Loader from '../../components/Loader/index'
 
 const SignupForm = () => {
   const labelStyle = { fontSize: "15px" };
@@ -68,7 +69,7 @@ const SignupForm = () => {
 
   return(
     <Container>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
       {!isLoading && auth && <Redirect to='/dashboard' />}
       {!isLoading && !auth && 
       <div>

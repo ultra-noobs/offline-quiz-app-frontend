@@ -4,6 +4,7 @@ import { Icon, Button, Container, Header, Form } from 'semantic-ui-react'
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
 import HamburgerMenu from '../../../components/HamburgerMenu/index'
+import Loader from '../../../components/Loader/index'
 
 const Create = () => {
     
