@@ -4,10 +4,10 @@ import { Icon, Button, Container, Header, Form } from 'semantic-ui-react'
 
 const Create = () => {
     const [questionCount, setquestionCount] = useState(0);
-    const [questionsInput, setquestionsInput] = useState([]);
+    const [questionsArr, setquestionsArr] = useState([]);
     const [questions, setQuestions] = useState({question: '', options: ''})
     const incrementAndRender = () => {
-        questionsInput.push(questionCount);
+        questionsArr.push(questionCount);
         console.log(questionsArr);
         setquestionCount(questionCount + 1);
     }
