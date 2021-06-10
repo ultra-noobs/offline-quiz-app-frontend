@@ -44,6 +44,7 @@ const Create = () => {
                 },
             }
         )
+        console.log(response);
     }
 
     const buttonStyle = { marginTop: "10px" }
