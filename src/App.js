@@ -17,11 +17,11 @@ const App = () => {
       <Layout>
           <Switch>
             <Route exact path="/" component={FrontPage} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/dashboard/create" component={Create} />
-            <Route exact path="/dashboard/view/:id" component={View} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard/create" component={Create} />
+            <Route path="/dashboard/view/:id" component={View} />
           </Switch>
       </Layout>
       </Router>
