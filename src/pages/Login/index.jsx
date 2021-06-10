@@ -1,8 +1,10 @@
-import { React, useState } from 'react'
+import { React, useState,useEffect } from 'react'
 import { Button, Form, Container, Message, Header } from 'semantic-ui-react'
 import Axios from 'axios';
-import { useHistory } from "react-router-dom";
+import { useHistory,Redirect } from "react-router-dom";
 import './Login.scss'
+import useAuthStatus from "../../utils/customHooks/user";
+import useToken from "../../utils/customHooks/token";
 
 const LoginForm = () => {
 
@@ -13,6 +15,8 @@ const LoginForm = () => {
     password: "",
   });
 
+  const {setToken} = useToken();
+  const {getStatus} = useAuthStatus();
   const history = useHistory();
   const setInfo = (e) => {
     setUserInfo({
@@ -20,6 +24,17 @@ const LoginForm = () => {
         [e.target.name]: e.target.value  
     })
   }
+  var [isLoading,setLoading] = useState(true);
+  var [auth,setAuth] = useState();
+
+  useEffect(()=>{
+     const checkStatus = async()=>{
+       const isAuthenticated = await getStatus();
+        setAuth(isAuthenticated);
+        setLoading(false);
+     }
+     checkStatus();
+  },[])
 
   const sendData = async () => {
     const { email, password } = userInfo;
@@ -27,13 +42,19 @@ const LoginForm = () => {
         password,
         email
     }
-    console.log(userData);
     try {
-      var response = await Axios.post('http://localhost:5000/login', userData)
+      const response = await Axios.post('http://localhost:5000/login', userData)
+      const token = response.data.token;
+      const errorMessage = response.data.errorMessage;
+      if(errorMessage){
+        seterrMessage(errorMessage);
+      }else{
+        setToken(token);
+        history.push('/dashboard')
+      }
     } catch(err) {
       seterrMessage(err);
     }
-    history.push('/dashboard')
   }
 
   const formElements = [{ name: "email", placeholder: "Enter your email" },{name: "password", placeholder: "Enter password"}];
@@ -41,14 +62,20 @@ const LoginForm = () => {
 
   return (
     <Container>
-       <Header as='h1'>Login</Header>
-       <Form error={!!errMessage}>  
-         {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
-         <Button type='submit' onClick={() => sendData()}>Login</Button>
-         <Message error header="Oops!!" content={errMessage} /> 
-        </Form>
+      {isLoading && <div>Loading...</div>}
+      {!isLoading && auth && <Redirect to='/dashboard' />}
+      {!isLoading && !auth && 
+        <div>
+          <Header as='h1'>Login</Header>
+          <Form error={!!errMessage}>  
+            {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
+            <Button type='submit' onClick={() => sendData()}>Login</Button>
+            <Message error header="Oops!!" content={errMessage} /> 
+          </Form>
+        </div>
+      }
     </Container>
   ) 
-    };
+};
 
 export default LoginForm;
