@@ -3,11 +3,6 @@ import "./Dashboard.scss";
 import {
   Grid,
   Header,
-  Icon,
-  Menu,
-  Segment,
-  Sidebar,
-  Button,
 } from "semantic-ui-react";
 import Card from "../../components/Card/index";
 import { NavLink, Redirect } from "react-router-dom";
@@ -16,7 +11,7 @@ import useToken from "../../utils/customHooks/token";
 import HamburgerMenu from "../../components/HamburgerMenu/index";
 
 const Dashboard = () => {
-  const [visible, setVisible] = useState(false);
+
   const { setToken } = useToken();
   const { getStatus } = useAuthStatus();
   var [isLoading, setLoading] = useState(true);
@@ -60,20 +55,4 @@ const Dashboard = () => {
     </div>
   );
 };
-{
-  /* <Header as='h3'>Your Quizes</Header>
-                  <Grid columns='five' divided>
-                    <Grid.Row>
-                      {[0, 1, 2, 3, 4].map((ele, index) => {
-                        return (
-                          <Grid.Column>
-                            <NavLink exact activeClassName="current" to={`/dashboard/view/${ele}`}>
-                              <Card />
-                            </NavLink>
-                          </Grid.Column>
-                        )
-                      })}
-                    </Grid.Row>
-                  </Grid> */
-}
 export default Dashboard;

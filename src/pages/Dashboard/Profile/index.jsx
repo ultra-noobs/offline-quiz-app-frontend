@@ -28,7 +28,7 @@ const Profile = () => {
   const [currentInfo, setCurrentInfo] = useState({ gmail: '', batchno: '' })
   const [userReq, setUserReq] = useState({
     loading: true,
-    user: null
+    user: false
   })
   const { getToken } = useToken();
   const saveBatchInfo = () => {
@@ -71,9 +71,9 @@ const Profile = () => {
 
   return (
     <div>
-      {userReq.isLoading && <div>Loading...</div>}
-      {!userReq.isLoading && !userReq.user && <Redirect to="/login"></Redirect>}
-      {!userReq.isLoading && userReq.user &&
+      {userReq.loading && <div>Loading...</div>}
+      {!userReq.loading && !userReq.user && <Redirect to="/login"></Redirect>}
+      {!userReq.loading && userReq.user &&
         <HamburgerMenu>
           <div className="profile__page">
             <div className="profile__page__info">
