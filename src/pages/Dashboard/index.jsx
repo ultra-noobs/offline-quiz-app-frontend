@@ -9,6 +9,8 @@ import { NavLink, Redirect } from "react-router-dom";
 import useAuthStatus from "../../utils/customHooks/user";
 import useToken from "../../utils/customHooks/token";
 import HamburgerMenu from "../../components/HamburgerMenu/index";
+import Loader from '../../components/Loader/index'
+import Axios from 'axios'
 
 const Dashboard = () => {
 
@@ -17,18 +19,31 @@ const Dashboard = () => {
   var [isLoading, setLoading] = useState(true);
   var [auth, setAuth] = useState();
 
-  useEffect(() => {
+  useEffect(async () => {
     const checkStatus = async () => {
       const isAuthenticated = await getStatus();
       setAuth(isAuthenticated);
       setLoading(false);
     };
+
+    const token = setToken();
+
+    // const quizes = await Axios.get(
+    //   'http://localhost:5000/dashboard',{
+    //     headers: {
+    //       Authorization: token,
+    //       },
+    //   }
+    // );
+    
+    // console.log(quizes);
+
     checkStatus();
   }, []);
 
   return (
     <div className="container">
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (
         <HamburgerMenu>

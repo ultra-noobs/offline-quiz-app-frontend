@@ -3,6 +3,7 @@ import './View.scss'
 import Question from '../../../components/Question/index'
 import { Container, Divider, Button } from "semantic-ui-react";
 import Hamburgermenu from '../../../components/HamburgerMenu/index'
+import Loader from '../../../components/Loader/index'
 
 const myQuestions = [
     {

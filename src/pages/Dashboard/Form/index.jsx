@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { Container, Form, Button } from 'semantic-ui-react'
 
-const Form  = () => {
+const FormCompoenent  = () => {
 
     const [useData, setUserData ] = useState({name: '', id: '', phno: ''})
 
@@ -14,6 +14,7 @@ const Form  = () => {
 
     return(
         <Container>
+            <Form>
             <Form.Field>
                 <label> Name </label>
                 <input name="name" onChange={(e) => updateUserState(e)} />
@@ -21,10 +22,11 @@ const Form  = () => {
                 <input name="id" onChange={(e) => updateUserState(e)} />
                 <label> Phonenumber </label>
                 <input name="phno" nChange={(e) => updateUserState(e)} />
-                <Button primary> Submit </Button>
+                <Button primary style={{ marginTop: "10px" }}> Submit </Button>
             </Form.Field>
+            </Form>
         </Container>
     );
 }
 
-export default Form;
+export default FormCompoenent;
