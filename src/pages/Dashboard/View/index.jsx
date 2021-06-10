@@ -1,7 +1,8 @@
 import React from "react"
 import './View.scss'
 import Question from '../../../components/Question/index'
-import { Container, Divider } from "semantic-ui-react";
+import { Container, Divider, Button } from "semantic-ui-react";
+import Hamburgermenu from '../../../components/HamburgerMenu/index'
 
 const myQuestions = [
     {
@@ -98,15 +99,16 @@ const renderQuestions = () => myQuestions.map((element, index)=>
 
 const View = () => {
     return(
+        <Hamburgermenu>
         <Container>
-            <h2 className="heading">Quiz 1</h2>
+            <h2 className="heading">Quiz 1 for batch XXXX<Button floated="right">Circulate</Button> </h2>
             <Divider/>
             {/* <Question question="Who invented JavaScript?"  options={options[0]}  />
             <Question question="Which one of these is a JavaScript package manager?" options={options[1]} />
             <Question question="Which tool can you use to ensure code quality?" options={options[2]} /> */}
             {renderQuestions()}
         </Container>
-        
+        </Hamburgermenu>
     );
 }
 

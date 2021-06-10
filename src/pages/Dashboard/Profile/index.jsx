@@ -11,6 +11,7 @@ import {
   Form,
 } from "semantic-ui-react";
 import { useState } from "react";
+import HamburgerMenu from '../../../components/HamburgerMenu/index'
 
 const items = [
   {
@@ -42,6 +43,7 @@ const Profile = () => {
   };
 
   return (
+    <HamburgerMenu>
     <div className="profile__page">
       <div className="profile__page__info">
         <Grid columns={1}>
@@ -82,6 +84,7 @@ const Profile = () => {
         {/* {batchInfo.map((ele, index) => <Card.Group style={{width: "100vw"}} centered items={[{header: ele.gmail , description: ele.batchno }]} ></Card.Group>)} */}
       </div>
     </div>
+    </HamburgerMenu>
   );
 };
 
