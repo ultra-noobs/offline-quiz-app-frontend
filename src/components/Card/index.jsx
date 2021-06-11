@@ -11,8 +11,8 @@ const CardReactComponent = (props) => (
   <Card>
     <Card.Content header='Quiz' />
     <Card.Content>
-      <p>{props.data}</p>
-      <p>{props.time}</p>
+      <p>date: {props.date}</p>
+      <p>Time: {props.time}</p>
     </Card.Content>
     {/* <Card.Content description={description} /> */}
     {/* <Card.Content extra>

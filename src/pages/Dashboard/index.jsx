@@ -38,10 +38,13 @@ const Dashboard = () => {
           }
       });
       // console.log(response.data)
-      response.data.map((element, index) => {
-        quizes.push(element);
-        console.log(element);
-      });
+      // response.data.map((element, index) => {
+      //   quizes.push(element);
+      //   console.log(element);
+      //   console.log(quizes.length)
+      // });
+      setQuizes(response.data)
+      console.log(quizes)
     }
     fetchQuizes(quizEndPoint);
   }, []);
@@ -52,7 +55,7 @@ const Dashboard = () => {
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (
         <HamburgerMenu>
-          <Header as="h3">Your Quizes</Header>
+          <Header as="h3">Your Quizes </Header>
           <Grid columns="five" divided>
             <Grid.Row>
               {quizes.map((ele, index) => {
@@ -63,7 +66,11 @@ const Dashboard = () => {
                       activeClassName="current"
                       to={`/dashboard/view/${ele}`}
                     >
-                      <Card />
+                      <Card 
+                      date = {ele.date}
+                      time = {ele.time}
+                      quizArray = {ele.finalQuizArray}
+                      />
                     </NavLink>
                   </Grid.Column>
                 );
