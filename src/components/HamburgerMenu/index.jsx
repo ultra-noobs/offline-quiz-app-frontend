@@ -37,7 +37,7 @@ const BurgerMenu = (props) => {
               >
                 <NavLink exact activeClassName="current" to={`/dashboard`}>
                   <Menu.Item as='a'>
-                    <Icon name='question circle outline' />
+                    <Icon name="question circle outline" />
                    OffQuiz
                 </Menu.Item>
                 </NavLink>
@@ -55,14 +55,17 @@ const BurgerMenu = (props) => {
                 Profile
               </Menu.Item>
               </NavLink>
+              <NavLink exact activeClassName="current" to={`/dashboard/about`}>
                 <Menu.Item as='a'>
-                  <Icon name='search' />
-                About
-              </Menu.Item>
+                    <Icon name='search' />
+                  About
+                </Menu.Item>
+              </NavLink>
+                
               </Sidebar>
 
               <Sidebar.Pusher>
-                <Segment basic style={{ height: "88vh" }} >
+                <Segment basic style={{ overflow: 'auto' ,height: "88vh" }} >
                   {props.children}
                 </Segment>
               </Sidebar.Pusher>
