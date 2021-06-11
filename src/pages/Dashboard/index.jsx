@@ -22,56 +22,41 @@ const Dashboard = () => {
   const { getToken } = useToken();
 
   useEffect(async () => {
-    const checkStatus = async () => {
-      const isAuthenticated = await getStatus();
-      setAuth(isAuthenticated);
-      setLoading(false);
-    };
-    checkStatus();
-
+    
     const token = getToken();
     const quizEndPoint = 'http://localhost:5000/dashboard';
-    const fetchQuizes = async (quizEndPoint) => {
       const response = await Axios.get(quizEndPoint, {
           headers:{
               Authorization: token,
           }
       });
-      // console.log(response.data)
-      // response.data.map((element, index) => {
-      //   quizes.push(element);
-      //   console.log(element);
-      //   console.log(quizes.length)
-      // });
-      setQuizes(response.data)
-      console.log(quizes);
-      console.log(response.data)
-    }
-    fetchQuizes(quizEndPoint);
+      setQuizes(response.data);
+
+      const isAuthenticated = await getStatus();
+      setAuth(isAuthenticated);
+      setLoading(false);
   }, []);
 
+  const rowPositon = { paddingTop: "15px" };
   return (
     <div className="container">
       {isLoading && <Loader />}
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (
         <HamburgerMenu>
-          <Header as="h3">Your Quizes </Header>
+          <Header as="h3" >Your Quizes </Header>
           <Grid columns="five" divided>
-            <Grid.Row>
+            <Grid.Row style={rowPositon}>
               {quizes.map((ele, index) => {
                 return (
                   <Grid.Column>
                     <NavLink
                       exact
                       activeClassName="current"
-                      to={`/dashboard/view/${ele}`}
+                      to={`/dashboard/view/${ele.id}`}
                     >
-                      <Card 
-                      date = {ele.data.date}
-                      time = {ele.data.time}
-                      id = {ele.id}
-                      // quizArray = {ele.data.finalQuizArray}
+                      <Card
+                      quizInfo = {ele} 
                       />
                     </NavLink>
                   </Grid.Column>

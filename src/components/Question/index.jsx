@@ -7,9 +7,9 @@ const Question = (props) => {
 
     const renderOptions = () => props.options.map((element,key)=>
         <div className="options">
-            {String.fromCharCode(key+65)}. {element}
-        </div>
-    )
+             {String.fromCharCode(key+65)}. {element}
+          </div>
+      )
 
     return (
         <div>

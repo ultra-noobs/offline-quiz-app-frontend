@@ -7,18 +7,18 @@ const description = [
   'She enjoys the outdoors and currently resides in upstate New York.',
 ].join(' ')
 
-const CardReactComponent = (props) => (
+const CardReactComponent = (props) => {
+
+  const { data, id } = props.quizInfo;
+
+  return(
   <Card>
-    <Card.Content header='Quiz' />
+    {(!!data.title) ? <Card.Content header={data.title} />:<Card.Content header="Quiz" /> }
     <Card.Content>
-      <p>date: {props.date}</p>
-      <p>Time: {props.time}</p>
+      <p>date: {data.date}</p>
+      <p>Time: {data.time}</p>
     </Card.Content>
-    {/* <Card.Content description={description} /> */}
-    {/* <Card.Content extra>
-      <Icon name='user' />4 Friends
-    </Card.Content> */}
-  </Card>
-)
+  </Card>)
+}
 
 export default CardReactComponent;
