@@ -15,33 +15,27 @@ import useToken from '../../utils/customHooks/token'
 const Dashboard = () => {
 
   const { getStatus } = useAuthStatus();
-  var [isLoading, setLoading] = useState(true);
-  var [auth, setAuth] = useState();
+  const [isLoading, setLoading] = useState(true);
+  const [auth, setAuth] = useState();
   const [quizes, setQuizes] = useState([{}]);
 
   const { getToken } = useToken();
 
-  useEffect(() => {
+  useEffect(async () => {
     const token = getToken();
     const quizEndPoint = 'http://localhost:5000/dashboard';
-    const fetchQuizes = async (endPoint) => {
-      const response = await Axios.get(endPoint, {
-        headers: {
-          Authorization: token,
-        }
-      });
-      setQuizes(response.data)
-      console.log(quizes)
-    }
-    const checkStatus = async () => {
-      const isAuthenticated = await getStatus();
-      setAuth(isAuthenticated);
-      setLoading(false);
-      if (isAuthenticated) {
-        fetchQuizes(quizEndPoint);
+
+    const response = await Axios.get(quizEndPoint, {
+      headers: {
+        Authorization: token,
       }
-    };
-    checkStatus();
+    });
+    setQuizes(response.data)
+
+    const isAuthenticated = await getStatus();
+    setAuth(isAuthenticated);
+    setLoading(false);
+
   }, []);
 
   const rowPositon = { paddingTop: "15px" };
