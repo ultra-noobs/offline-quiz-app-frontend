@@ -44,7 +44,8 @@ const Dashboard = () => {
       //   console.log(quizes.length)
       // });
       setQuizes(response.data)
-      console.log(quizes)
+      console.log(quizes);
+      console.log(response.data)
     }
     fetchQuizes(quizEndPoint);
   }, []);
@@ -67,9 +68,10 @@ const Dashboard = () => {
                       to={`/dashboard/view/${ele}`}
                     >
                       <Card 
-                      date = {ele.date}
-                      time = {ele.time}
-                      quizArray = {ele.finalQuizArray}
+                      date = {ele.data.date}
+                      time = {ele.data.time}
+                      id = {ele.id}
+                      // quizArray = {ele.data.finalQuizArray}
                       />
                     </NavLink>
                   </Grid.Column>
