@@ -36,12 +36,15 @@ const Create = () => {
         questions.forEach((ele) => {
             questionAndAnswers.push({ question: ele.value, answer: answers[i].value })
             i++;
-        })
+        });
+
+        const finalQnA = questionAndAnswers.filter(element => !!element.value || !!element.answer); 
+        console.log(questionAndAnswers);
         const token = getToken();
         const response = await Axios.post(
             'http://localhost:5000/dashboard/saveQuiz', 
             {
-                questionAndAnswers,
+                finalQnA,
                 time:quizDateAndTime.time,
                 date:quizDateAndTime.date
             },

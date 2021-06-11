@@ -1,7 +1,8 @@
 import { React, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Container, Form, Button, Message } from 'semantic-ui-react'
+import { Container, Form, Button, Message, Header } from 'semantic-ui-react'
 import Axios from 'axios';
+import "./Form.scss"
 
 const FormRegisteration = () => {
 
@@ -16,6 +17,7 @@ const FormRegisteration = () => {
             [e.target.name]: e.target.value
         })
     }
+    const labelStyle = { fontSize: "15px", marginTop: "15px" };
 
     const handleSubmit = async () => {
         const data = { name: useData.name, id: useData.id, phone: useData.phno, token, batch }
@@ -40,13 +42,15 @@ const FormRegisteration = () => {
     return (
         <Container>
             <Form>
+                <Header as="h1"> Welcome to OffQuiz </Header>
+                <Header as="h3"> Invitation Form </Header>
                 <Form.Field>
-                    <label> Name </label>
-                    <input name="name" onChange={(e) => updateUserState(e)} required />
-                    <label> Roll no </label>
-                    <input name="id" onChange={(e) => updateUserState(e)} required />
-                    <label> Phonenumber </label>
-                    <input name="phno" onChange={(e) => updateUserState(e)} required />
+                    <label style={labelStyle} > Name* </label>
+                    <input name="name" type="text" onChange={(e) => updateUserState(e)} required />
+                    <label style={labelStyle} > Roll no* </label>
+                    <input name="id" type="number" onChange={(e) => updateUserState(e)} required />
+                    <label style={labelStyle} > Phonenumber* </label>
+                    <input name="phno" type="number" onChange={(e) => updateUserState(e)} required />
                     <Button primary style={{ marginTop: "10px" }} onClick={handleSubmit}> Submit </Button>
                     {error && 
                         <Message negative>
