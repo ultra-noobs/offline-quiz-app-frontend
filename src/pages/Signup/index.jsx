@@ -7,11 +7,19 @@ import useToken from "../../utils/customHooks/token";
 import useAuthStatus from "../../utils/customHooks/user";
 import Navbar from "../../components/Navigation/index"
 import Loader from '../../components/Loader/index'
+import 'semantic-ui-css/semantic.min.css'
 
 const SignupForm = () => {
   const labelStyle = { fontSize: "15px" };
-  const formElements = [{ name: "name", placeholder: "Enter your name" },{name: "email", placeholder: "Enter your email"}, {name: "institution", placeholder: "Enter your institution"}, {name: "password", placeholder: "Set password"}, {name: "re-password", placeholder: "Re renter the password"}];
-  const renderFormElement = (name, placeholder) => <Form.Field><label style={labelStyle} className="label">{name}</label><input type={name} name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>;
+  const formElements = [{ name: "name", placeholder: "Enter your name", type: "text" },{name: "email", placeholder: "Enter your email", type: "email"}, {name: "institution", placeholder: "Enter your institution", type: "text"}, {name: "password", placeholder: "Set password", type: "password"}, {name: "re-password", placeholder: "Re renter the password", type: "password" }];
+  const renderFormElements = () => { 
+    return formElements.map(
+      (ele, index) =>  
+      <Form.Field>
+        <label style={labelStyle} className="label">{ele.name}</label>
+        <input type={ele.type} name={ele.name} onChange={(e) => setInfo(e)} placeholder={ele.placeholder} />
+      </Form.Field>);
+      }
 
   const [errMessage, seterrMessage] = useState('');
   const [userInfo , setUserInfo] = useState({
@@ -76,7 +84,7 @@ const SignupForm = () => {
         <Navbar />
         <Header as='h1'>Register</Header>
         <Form error={!!errMessage} > 
-          {formElements.map((ele, index) => renderFormElement(ele.name, ele.placeholder))}  
+          {renderFormElements()}  
           <Button type='submit' onClick={() => sendData()}>Register</Button>  
           <Message error header="Oops!!" content={errMessage} />
         </Form>
