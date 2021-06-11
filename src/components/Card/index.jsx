@@ -7,13 +7,17 @@ const description = [
   'She enjoys the outdoors and currently resides in upstate New York.',
 ].join(' ')
 
-const CardReactComponent = () => (
+const CardReactComponent = (props) => (
   <Card>
-    <Card.Content header='About Amy' />
-    <Card.Content description={description} />
-    <Card.Content extra>
-      <Icon name='user' />4 Friends
+    <Card.Content header='Quiz' />
+    <Card.Content>
+      <p>{props.data}</p>
+      <p>{props.time}</p>
     </Card.Content>
+    {/* <Card.Content description={description} /> */}
+    {/* <Card.Content extra>
+      <Icon name='user' />4 Friends
+    </Card.Content> */}
   </Card>
 )
 
