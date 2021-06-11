@@ -19,7 +19,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const [Link, setLink] = useState();
   const [openLinkBox, setLinkBox] = useState(false);
-  const [batchInfo, setBatchInfo] = useState([{}]);
+  const [batchInfo, setBatchInfo] = useState([]);
   const [currentInfo, setCurrentInfo] = useState({ gmail: '', batchno: '' })
   const [userInfo, setUserInfo] = useState({ email: '', institute: '', name: '' })
   const [userReq, setUserReq] = useState({
@@ -27,22 +27,23 @@ const Profile = () => {
     user: false
   })
   const { getToken } = useToken();
+  const token = getToken();
   const saveBatchInfo = async () => {
     setOpen(false);
-    batchInfo.push(currentInfo);
+    if(!currentInfo.batchno.trim()) return;
     try {
-      const token = getToken();
       const response = await Axios.post(
         "http://localhost:5000/profile/setbatch",
         currentInfo,
         {
-          headers:{
-              Authorization: token,
+          headers: {
+            Authorization: token,
           }
         }
       )
       setLink(`http://localhost:3000/formRegister/${response.data.token}/${currentInfo.batchno}`)
       setLinkBox(true);
+      fetchBatch();
     } catch (error) {
       console.log(error.message);
       setLink("OOPS!! Some Error Occured")
@@ -60,10 +61,21 @@ const Profile = () => {
     });
   };
 
+  const fetchBatch = async () => {
+    const response = await Axios.get(
+      'http://localhost:5000/profile/getBatch',
+      {
+        headers: {
+          Authorization: token
+        }
+      }
+    )
+    setBatchInfo(response.data.batch);
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = getToken();
         const response = await Axios.get(
           'http://localhost:5000/profile',
           {
@@ -80,6 +92,7 @@ const Profile = () => {
       }
     }
     fetchData();
+    fetchBatch();
   }, [])
 
   return (
@@ -120,8 +133,8 @@ const Profile = () => {
                   <Button onClick={() => setOpen(false)}>Cancel</Button>
                   <Button Icon onClick={() => saveBatchInfo()} positive>
                     <Icon name="save" />
-              Save
-            </Button>
+                    Save
+                  </Button>
                 </Modal.Actions>
               </Modal>
               <Modal
@@ -131,7 +144,7 @@ const Profile = () => {
               >
                 <Modal.Header>Form Link</Modal.Header>
                 <Modal.Content>
-                  <div>{Link} <Button  onClick={() => {navigator.clipboard.writeText(Link)}}><Icon name="copy" size='large'/></Button></div>
+                  <div>{Link} <Button onClick={() => { navigator.clipboard.writeText(Link) }}><Icon name="copy" size='large' /></Button></div>
                   <p>Copy Above Link and share it with the batch of student whom you want to collect the number</p>
                 </Modal.Content>
                 <Modal.Actions>
@@ -139,7 +152,18 @@ const Profile = () => {
                 </Modal.Actions>
               </Modal>
               <div className="profile__page__batch__display">
-              {batchInfo.filter(element => !!element.batchno || !!element.gmail ).map((ele, index) => <Card fluid color='green' header={ (!!ele.gmail) ? "Batch mail " + ele.gmail : "Batch " + ele.batchno } />)}
+                {batchInfo.map((ele, index) => {
+                  return (
+                    <Card fluid color='green'>
+                      <Card.Content header={ele.batchName} />
+                      <Card.Content>
+                        <p>Form Link : {ele.link}</p>
+                        <p>Registered Student : {ele.size}</p>
+                      </Card.Content>
+                    </Card>
+                  );
+                }
+                )}
               </div>
             </div>
           </div>

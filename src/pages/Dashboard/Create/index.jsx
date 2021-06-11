@@ -10,7 +10,7 @@ const Create = () => {
     const [ questionCount, setquestionCount ] = useState(0);
     const [ questionsInput, setquestionsInput ] = useState([]);
     const [ questionAndAnswers, setquestionAndAnswers ] = useState([{ question:'', answer: '' }]);
-    const [ quizDateAndTime, setQuizDateAndTime ] = useState({date: '', time: ''})
+    const [ quizDateAndTimeAndTitle, setQuizDateAndTimeAndTitle ] = useState({date: '', time: '', title: ''})
 
     const incrementAndRender = () => {
         questionsInput.push(questionCount);
@@ -44,8 +44,9 @@ const Create = () => {
             'http://localhost:5000/dashboard/saveQuiz', 
             {
                 finalQnA,
-                time:quizDateAndTime.time,
-                date:quizDateAndTime.date
+                time: quizDateAndTimeAndTitle.time,
+                date: quizDateAndTimeAndTitle.date,
+                title: quizDateAndTimeAndTitle.title
             },
             {
                 headers: {
@@ -56,12 +57,12 @@ const Create = () => {
         console.log(response);
     }
 
-    const setDateAndTime = (e) => {
-        setQuizDateAndTime({
-            ...quizDateAndTime,
+    const setDateAndTimeAndTitle = (e) => {
+        setQuizDateAndTimeAndTitle({
+            ...quizDateAndTimeAndTitle,
             [e.target.name]: e.target.value
         });
-        console.log(quizDateAndTime);
+        console.log(quizDateAndTimeAndTitle);
     };
  
     const buttonStyle = { marginTop: "10px" }
@@ -71,9 +72,11 @@ const Create = () => {
             <Container>
                 <Header> Add Questions here <Button primary floated="right" onClick={() => saveAndParse()} > <Icon name='save' /> Save </Button> <Button warning floated="right">Circulate</Button> </Header>
                 <Form>
-                    <label>Enter quiz timing </label>
-                    <input style={buttonStyle} name="date" onChange={(e) => setDateAndTime(e)} type="date"></input>
-                    <input style={buttonStyle} name="time" onChange={(e) => setDateAndTime(e)} type="time"></input> 
+                    <label>Quiz Title</label>
+                    <input style={buttonStyle} name="title" onChange={(e) => setDateAndTimeAndTitle(e)} type="text"></input>
+                    <label style={buttonStyle}>Enter quiz timing </label>
+                    <input style={buttonStyle} name="date" onChange={(e) => setDateAndTimeAndTitle(e)} type="date"></input>
+                    <input style={buttonStyle} name="time" onChange={(e) => setDateAndTimeAndTitle(e)} type="time"></input> 
                     {renderQuestionInput()}
                 </Form>
                 <Button icon style={buttonStyle} labelPosition='left' floated="right" onClick={() => incrementAndRender()}>
