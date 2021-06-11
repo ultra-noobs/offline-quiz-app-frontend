@@ -44,27 +44,26 @@ const Dashboard = () => {
     checkStatus();
   }, []);
 
+  const rowPositon = { paddingTop: "15px" };
   return (
     <div className="container">
       {isLoading && <Loader />}
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (
         <HamburgerMenu>
-          <Header as="h3">Your Quizes </Header>
+          <Header as="h3" >Your Quizes </Header>
           <Grid columns="five" divided>
-            <Grid.Row>
+            <Grid.Row style={rowPositon}>
               {quizes.map((ele, index) => {
                 return (
                   <Grid.Column>
                     <NavLink
                       exact
                       activeClassName="current"
-                      to={`/dashboard/view/${ele}`}
+                      to={`/dashboard/view/${ele.id}`}
                     >
                       <Card
-                        date={ele.date}
-                        time={ele.time}
-                        quizArray={ele.finalQuizArray}
+                      quizInfo = {ele} 
                       />
                     </NavLink>
                   </Grid.Column>
