@@ -15,5 +15,9 @@
     &__batch {
         width: 60%;
         margin-left: 10%;
+
+        &__display {
+            margin-top: 10px;
+        }
     }
 }

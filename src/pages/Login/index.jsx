@@ -6,6 +6,7 @@ import './Login.scss'
 import useAuthStatus from "../../utils/customHooks/user";
 import useToken from "../../utils/customHooks/token";
 import Navbar from "../../components/Navigation/index"
+import Loader from '../../components/Loader/index'
 
 const LoginForm = () => {
 
@@ -63,7 +64,7 @@ const LoginForm = () => {
 
   return (
     <Container>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
       {!isLoading && auth && <Redirect to='/dashboard' />}
       {!isLoading && !auth && 
         <div>

@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
 import HamburgerMenu from '../../../components/HamburgerMenu/index'
+import Loader from '../../../components/Loader/index'
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -84,7 +85,7 @@ const Profile = () => {
 
   return (
     <div>
-      {userReq.loading && <div>Loading...</div>}
+      {userReq.loading && <Loader />}
       {!userReq.loading && !userReq.user && <Redirect to="/login"></Redirect>}
       {!userReq.loading && userReq.user &&
         <HamburgerMenu>
@@ -138,8 +139,9 @@ const Profile = () => {
                   <Button onClick={() => setLinkBox(false)}>Close</Button>
                 </Modal.Actions>
               </Modal>
-              {batchInfo.map((ele, index) => <Card fluid color='green' header={ele.gmail} />)}
-              {/* {batchInfo.map((ele, index) => <Card.Group style={{width: "100vw"}} centered items={[{header: ele.gmail , description: ele.batchno }]} ></Card.Group>)} */}
+              <div className="profile__page__batch__display">
+              {batchInfo.filter(element => !!element.batchno || !!element.gmail ).map((ele, index) => <Card fluid color='green' header={ (!!ele.gmail) ? "Batch mail " + ele.gmail : "Batch " + ele.batchno } />)}
+              </div>
             </div>
           </div>
         </HamburgerMenu>
