@@ -1,7 +1,7 @@
 import React from "react"
 import './View.scss'
 import Question from '../../../components/Question/index'
-import { Container, Divider, Button, ListItem } from "semantic-ui-react";
+import { Container, Divider, Button } from "semantic-ui-react";
 import HamburgerMenu from '../../../components/HamburgerMenu/index'
 import Loader from '../../../components/Loader/index'
 
@@ -102,11 +102,9 @@ const View = () => {
     return(
       <HamburgerMenu>
         <Container>
-          <ListItem>
             <h2 className="heading">Quiz 1 for batch XXXX<Button floated="right">Circulate</Button> </h2>
             <Divider/>
             {renderQuestions()}
-          </ListItem>
         </Container>
       </HamburgerMenu>
         
