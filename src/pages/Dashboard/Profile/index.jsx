@@ -2,7 +2,6 @@ import "./Profile.scss";
 import {
   Grid,
   Card,
-  Input,
   Header,
   Button,
   Icon,

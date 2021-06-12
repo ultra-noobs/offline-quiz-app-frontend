@@ -1,6 +1,6 @@
 import React from "react"
 import "./Question.scss"
-import {Container,Divider} from 'semantic-ui-react'
+import {Divider} from 'semantic-ui-react'
 
 
 const Question = (props) => {

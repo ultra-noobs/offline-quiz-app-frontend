@@ -3,7 +3,7 @@ import { useLocation, Redirect } from "react-router-dom";
 import './View.scss'
 import Question from '../../../components/Question/index'
 import { Container, Divider, Button } from "semantic-ui-react";
-import Hamburgermenu from '../../../components/HamburgerMenu/index'
+import HamburgerMenu from '../../../components/HamburgerMenu/index'
 import Loader from '../../../components/Loader/index'
 import useToken from '../../../utils/customHooks/token'
 import useAuthStatus from "../../../utils/customHooks/user";
@@ -41,6 +41,7 @@ const View = () => {
     );
 
     return(
+      <HamburgerMenu>
       <div>
       {isLoading && <Loader />}
       {!isLoading && !auth && <Redirect to="/login" />}
@@ -51,6 +52,7 @@ const View = () => {
             {renderQuestions()}
         </Container>)}
       </div>
+      </HamburgerMenu>
     );
 }
 
