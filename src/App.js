@@ -7,6 +7,7 @@ import FormRegisteration from './pages/Dashboard/Form/index'
 import View from './pages/Dashboard/View/index'
 import Header from './components/Navigation/index'
 import Profile from './pages/Dashboard/Profile/index'
+import ResponseTable from './pages/Dashboard/Profile/Reponses/index'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
@@ -26,6 +27,7 @@ const App = () => {
             <Route exact path="/dashboard/create" component={Create} />
             <Route exact path="/dashboard/profile" component={Profile} />
             <Route exact path="/dashboard/view/:id" component={View} />
+            <Route exact path="/dashboard/profile/batch/:batchid" component={ResponseTable} />
             <Route exact path="/formRegister/:token/:batch" component={FormRegisteration} />
           </Switch>
       </Router>

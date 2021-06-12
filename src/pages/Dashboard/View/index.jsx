@@ -9,95 +9,6 @@ import useToken from '../../../utils/customHooks/token'
 import useAuthStatus from "../../../utils/customHooks/user";
 import Axios from 'axios'
 
-const myQuestions = [
-    {
-      question: "Who invented JavaScript?",
-      options: [
-        "Douglas Crockford",
-        "Sheryl Sandberg",
-        "Brendan Eich"
-      ],
-      correctAnswer: "c"
-    },
-    {
-      question: "Which one of these is a JavaScript package manager?",
-      options: [
-        "Node.js",
-        "TypeScript",
-        "npm"
-      ],
-      correctAnswer: "c"
-    },
-    {
-      question: "Which tool can you use to ensure code quality?",
-      options: [
-        "Angular",
-        "jQuery",
-        "RequireJS",
-        "ESLint"
-      ],
-      correctAnswer: "d"
-    },
-    {
-        question: "Who invented JavaScript?",
-        options: [
-          "Douglas Crockford",
-          "Sheryl Sandberg",
-          "Brendan Eich"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which one of these is a JavaScript package manager?",
-        options: [
-          "Node.js",
-          "TypeScript",
-          "npm"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which tool can you use to ensure code quality?",
-        options: [
-          "Angular",
-          "jQuery",
-          "RequireJS",
-          "ESLint"
-        ],
-        correctAnswer: "d"
-      },
-      {
-        question: "Who invented JavaScript?",
-        options: [
-          "Douglas Crockford",
-          "Sheryl Sandberg",
-          "Brendan Eich"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which one of these is a JavaScript package manager?",
-        options: [
-          "Node.js",
-          "TypeScript",
-          "npm"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which tool can you use to ensure code quality?",
-        options: [
-          "Angular",
-          "jQuery",
-          "RequireJS",
-          "ESLint"
-        ],
-        correctAnswer: "d"
-      },
-    
-  ];
-
-
 const View = () => {
 
   const location = useLocation();
@@ -122,13 +33,8 @@ const View = () => {
       const isAuthenticated = await getStatus();
       setAuth(isAuthenticated);
       setLoading(false);
-      // console.log(currentQuiz.finalQuizArray);
-      // console.log(currentQuiz.finalQuizArray);    
   },[])
 
-  const test = () => {
-    console.log(currentQuiz.finalQuizArray);
-  }
 
   const renderQuestions = () => currentQuiz.finalQuizArray.map((element, index)=> 
     <Question question={element.question} options={element.option} index={index+1}/>
