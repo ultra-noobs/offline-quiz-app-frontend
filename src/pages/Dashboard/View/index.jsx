@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react"
-import { useLocation, Redirect } from "react-router-dom";
+import { useLocation, Redirect,useParams } from "react-router-dom";
 import './View.scss'
 import Question from '../../../components/Question/index'
 import { Container, Divider, Button } from "semantic-ui-react";
@@ -9,95 +9,6 @@ import useToken from '../../../utils/customHooks/token'
 import useAuthStatus from "../../../utils/customHooks/user";
 import Axios from 'axios'
 
-const myQuestions = [
-    {
-      question: "Who invented JavaScript?",
-      options: [
-        "Douglas Crockford",
-        "Sheryl Sandberg",
-        "Brendan Eich"
-      ],
-      correctAnswer: "c"
-    },
-    {
-      question: "Which one of these is a JavaScript package manager?",
-      options: [
-        "Node.js",
-        "TypeScript",
-        "npm"
-      ],
-      correctAnswer: "c"
-    },
-    {
-      question: "Which tool can you use to ensure code quality?",
-      options: [
-        "Angular",
-        "jQuery",
-        "RequireJS",
-        "ESLint"
-      ],
-      correctAnswer: "d"
-    },
-    {
-        question: "Who invented JavaScript?",
-        options: [
-          "Douglas Crockford",
-          "Sheryl Sandberg",
-          "Brendan Eich"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which one of these is a JavaScript package manager?",
-        options: [
-          "Node.js",
-          "TypeScript",
-          "npm"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which tool can you use to ensure code quality?",
-        options: [
-          "Angular",
-          "jQuery",
-          "RequireJS",
-          "ESLint"
-        ],
-        correctAnswer: "d"
-      },
-      {
-        question: "Who invented JavaScript?",
-        options: [
-          "Douglas Crockford",
-          "Sheryl Sandberg",
-          "Brendan Eich"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which one of these is a JavaScript package manager?",
-        options: [
-          "Node.js",
-          "TypeScript",
-          "npm"
-        ],
-        correctAnswer: "c"
-      },
-      {
-        question: "Which tool can you use to ensure code quality?",
-        options: [
-          "Angular",
-          "jQuery",
-          "RequireJS",
-          "ESLint"
-        ],
-        correctAnswer: "d"
-      },
-    
-  ];
-
-
 const View = () => {
 
   const location = useLocation();
@@ -106,12 +17,12 @@ const View = () => {
   var [isLoading, setLoading] = useState(true);
   var [auth, setAuth] = useState();
   const [ currentQuiz, setCurrentQuiz ] = useState({});
-  
-  useEffect( async () => {
-    let documentId = location.pathname.substr(16, location.pathname.length - 16);
-    let endpoint = "http://localhost:5000/dashboard/view/" + documentId;
+  const {id} = useParams();
+  const token = getToken();
 
-    const token = getToken();
+  useEffect( async () => {
+    let endpoint = "http://localhost:5000/dashboard/view/" + id;
+
       const response = await Axios.get(endpoint, {
           headers:{
               Authorization: token,
@@ -125,6 +36,18 @@ const View = () => {
       // console.log(currentQuiz.finalQuizArray);
       // console.log(currentQuiz.finalQuizArray);    
   },[])
+
+  const circulateTest = async()=>{
+    try {
+        await Axios.get(`http://localhost:5000/dashboard/circulate/${id}`,{
+            headers:{
+              Authorization: token,
+            }
+        })
+    } catch (error) {
+        
+    }
+}
 
   const test = () => {
     console.log(currentQuiz.finalQuizArray);
@@ -141,7 +64,7 @@ const View = () => {
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (
         <Container>
-            <h2 className="heading" onClick={() =>test()}>Quiz 1 for batch XXXX<Button floated="right">Circulate</Button> </h2>
+            <h2 className="heading" onClick={() =>test()}>Quiz 1 for batch XXXX<Button floated="right" onClick={circulateTest}>Circulate</Button> </h2>
             <Divider/>
             {renderQuestions()}
         </Container>)}
