@@ -8,7 +8,7 @@ import {
   Modal,
   Form,
 } from "semantic-ui-react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
@@ -26,6 +26,7 @@ const Profile = () => {
     loading: true,
     user: false
   })
+  const cardStyle = { marginTop: "10px" }
   const { getToken } = useToken();
   const token = getToken();
   const saveBatchInfo = async () => {
@@ -154,15 +155,20 @@ const Profile = () => {
               <div className="profile__page__batch__display">
                 {batchInfo.map((ele, index) => {
                   return (
-                    <Card fluid color='green'>
+                    <NavLink
+                    exact
+                    activeClassName="current"
+                    to={`/dashboard/profile/batch/${ele.batchName}`}
+                  >
+                    <Card fluid color='green' style={cardStyle}>
                       <Card.Content header={ele.batchName} />
                       <Card.Content>
                         <p>Form Link : {ele.link}</p>
                         <p>Registered Student : {ele.size}</p>
                       </Card.Content>
                     </Card>
-                  );
-                }
+                  </NavLink>
+                  );}
                 )}
               </div>
             </div>

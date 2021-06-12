@@ -33,25 +33,8 @@ const View = () => {
       const isAuthenticated = await getStatus();
       setAuth(isAuthenticated);
       setLoading(false);
-      // console.log(currentQuiz.finalQuizArray);
-      // console.log(currentQuiz.finalQuizArray);    
   },[])
 
-  const circulateTest = async()=>{
-    try {
-        await Axios.get(`http://localhost:5000/dashboard/circulate/${id}`,{
-            headers:{
-              Authorization: token,
-            }
-        })
-    } catch (error) {
-        
-    }
-}
-
-  const test = () => {
-    console.log(currentQuiz.finalQuizArray);
-  }
 
   const renderQuestions = () => currentQuiz.finalQuizArray.map((element, index)=> 
     <Question question={element.question} options={element.option} index={index+1}/>
