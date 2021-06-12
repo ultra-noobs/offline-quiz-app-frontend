@@ -13,35 +13,33 @@ const ResponseTable = () => {
     const { getStatus } = useAuthStatus();
     var [isLoading, setLoading] = useState(true);
     var [auth, setAuth] = useState();
+    const [ batchno, setbatchno ] = useState('');
     const [ currentBatch, setcurrentBatch ] = useState([{}]);
     
     useEffect( async () => {
       let documentId = location.pathname.substr(25, location.pathname.length - 25);
       let endpoint = "http://localhost:5000/profile/batch/" + documentId;
-    //   console.log(location.pathname + " " + documentId);
+
       const token = getToken();
         const response = await Axios.get(endpoint, {
             headers:{
                 Authorization: token,
             }
         });
-        console.log(response.data);
-        setcurrentBatch(response.data);
+
+        setcurrentBatch(response.data[0].students);
+        setbatchno(response.data[0].name);
         const isAuthenticated = await getStatus();
         setAuth(isAuthenticated);
         setLoading(false);
     },[])
-
-    const test = () =>{
-        console.log("ye state hai ", currentBatch[0].students);
-    }
 
   return (
       <Container>
     {isLoading && <Loader />}
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (<div onClick={() => test()}>
-          <Header as="h1">Students of batch XXXX</Header>
+          <Header as="h1">Students of batch {batchno}</Header>
     <Table celled>
       <Table.Header>
         <Table.Row>
@@ -51,17 +49,16 @@ const ResponseTable = () => {
           <Table.HeaderCell>Phonenumber</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-
-      {currentBatch[0].students.map((element, index) => {
-           <Table.Body>
+      <Table.Body>
+      {currentBatch.map((element, index) => 
            <Table.Row>
              <Table.Cell>{index}</Table.Cell>
              <Table.Cell>{element.id}</Table.Cell>
              <Table.Cell>{element.name}</Table.Cell>
              <Table.Cell>{element.phone}</Table.Cell>
            </Table.Row>
+          )}
          </Table.Body>
-      })}
     </Table>
     </div>
     )}
