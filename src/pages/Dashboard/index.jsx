@@ -50,7 +50,7 @@ const Dashboard = () => {
             <Grid.Row style={rowPositon}>
               {quizes.map((ele, index) => {
                 return (
-                  <Grid.Column>
+                  <Grid.Column style={rowPositon}>
                     <NavLink
                       exact
                       activeClassName="current"

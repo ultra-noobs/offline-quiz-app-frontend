@@ -35,10 +35,15 @@ const BurgerMenu = (props) => {
                 visible={visible}
                 width='thin'
               >
-                <NavLink exact activeClassName="current" to={`/dashboard`}>
                   <Menu.Item as='a'>
                     <Icon name="question circle outline" />
                    OffQuiz
+                </Menu.Item>
+
+                <NavLink exact activeClassName="current" to={`/dashboard`}>
+                  <Menu.Item as='a'>
+                    <Icon name="dashboard" />
+                  Dashboard
                 </Menu.Item>
                 </NavLink>
 
