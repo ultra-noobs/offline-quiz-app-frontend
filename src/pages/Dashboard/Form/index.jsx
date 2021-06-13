@@ -50,7 +50,7 @@ const FormRegisteration = () => {
                     <label style={labelStyle} > Roll no* </label>
                     <input name="id" type="number" onChange={(e) => updateUserState(e)} required />
                     <label style={labelStyle} > Phonenumber* </label>
-                    <input name="phno" type="number" onChange={(e) => updateUserState(e)} required />
+                    <input name="phno" type="number" placeholder="Add country code to phone number" onChange={(e) => updateUserState(e)} required />
                     <Button primary style={{ marginTop: "10px" }} onClick={handleSubmit}> Submit </Button>
                     {error && 
                         <Message negative>
