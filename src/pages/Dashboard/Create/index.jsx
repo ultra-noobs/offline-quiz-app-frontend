@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Icon, Button, Container, Header, Form, Dropdown } from 'semantic-ui-react'
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
-import HamburgerMenu from '../../../components/HamburgerMenu/index'
-import { useEffect } from "react";
+import HamburgerMenu from '../../../components/HamburgerMenu/index';
 
 const Create = () => {
     
@@ -90,10 +89,6 @@ const Create = () => {
     }
 
     const buttonStyle = { marginTop: "10px" }
-
-    useEffect(() => {
-        fetchBatch();
-    }, []);
 
     return (
         <div>
