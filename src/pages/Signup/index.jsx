@@ -49,7 +49,7 @@ const SignupForm = () => {
         setLoading(false);
      }
      checkStatus();
-  },[])
+  },[getStatus])
 
   const sendData = async () => {
     const { email, password, name, institution } = userInfo;

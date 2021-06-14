@@ -5,7 +5,7 @@ import {
   Header,
 } from "semantic-ui-react";
 import Card from "../../components/Card/index";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import useAuthStatus from "../../utils/customHooks/user";
 import HamburgerMenu from "../../components/HamburgerMenu/index";
 import Loader from '../../components/Loader/index'
@@ -21,7 +21,7 @@ const Dashboard = () => {
 
   const { getToken } = useToken();
 
-  useEffect(async () => {
+  useEffect(async() => {
     const token = getToken();
     const isAuthenticated = await getStatus();
     setAuth(isAuthenticated);
@@ -52,15 +52,9 @@ const Dashboard = () => {
               {quizes.map((ele, index) => {
                 return (
                   <Grid.Column style={rowPositon}>
-                    <NavLink
-                      exact
-                      activeClassName="current"
-                      to={`/dashboard/view/${ele.id}`}
-                    >
                       <Card
                       quizInfo = {ele} 
                       />
-                    </NavLink>
                   </Grid.Column>
                 );
               })}

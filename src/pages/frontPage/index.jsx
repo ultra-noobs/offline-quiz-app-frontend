@@ -1,10 +1,11 @@
 import "./frontPage.scss";
 import { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import * as content from "../../contents/content.json"
 import { Button } from 'semantic-ui-react'
 import useAuthStatus from "../../utils/customHooks/user";
 import Navbar from "../../components/Navigation/index"
+import Loader from '../../components/Loader/index'
 
 const FrontPage = () => {
     const { getStatus } = useAuthStatus();
@@ -18,10 +19,10 @@ const FrontPage = () => {
             setLoading(false);
         }
         checkStatus();
-    }, [])
+    }, [getStatus])
     return (
         <div>
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <Loader />}
             {!isLoading && auth && <Redirect to='/dashboard' />}
             {!isLoading && !auth &&
                 <div>
@@ -32,7 +33,7 @@ const FrontPage = () => {
                                 <h1>{content.content[0].frontPage.TagLine1}</h1>
                                 <p>{content.content[0].frontPage.TagLine2}</p>
                             </div>
-                            <Button primary >Get started</Button>
+                         <Link to='/register'><Button primary >Get started</Button> </Link>
                         </div>
                         <div className="frontpage__img">
                             <img className="frontPageImg" src="images/offline.svg" alt="" />

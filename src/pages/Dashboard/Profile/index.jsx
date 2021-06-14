@@ -9,11 +9,12 @@ import {
   Form,
 } from "semantic-ui-react";
 import { Redirect, NavLink } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
 import HamburgerMenu from '../../../components/HamburgerMenu/index'
 import Loader from '../../../components/Loader/index'
+import React from "react"
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -62,17 +63,39 @@ const Profile = () => {
     });
   };
 
-  const fetchBatch = async () => {
-    const response = await Axios.get(
+  const deleteBatch = async (batchId) => {
+   await Axios.get('http://localhost:5000/profile/batch/delete/' + batchId, {
+      headers: {
+        Authorization: token
+      }
+    });
+    window.location.reload();
+  }
+
+  // useCallback(() => {
+    // const fetchBatch = async () => {
+    //   const response = await Axios.get(
+    //     'http://localhost:5000/profile/getBatch',
+    //     {
+    //       headers: {
+    //         Authorization: token
+    //       }
+    //     }
+    //   )
+    //   setBatchInfo(response.data.batch);
+    // }
+  // })
+
+const fetchBatch = useCallback(() => {
+    Axios.get(
       'http://localhost:5000/profile/getBatch',
       {
         headers: {
           Authorization: token
         }
       }
-    )
-    setBatchInfo(response.data.batch);
-  }
+    ).then((response) => setBatchInfo(response.data.batch))
+}, [token])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,7 +117,7 @@ const Profile = () => {
     }
     fetchData();
     fetchBatch();
-  }, [])
+  }, [fetchBatch, token])
 
   return (
     <div>
@@ -155,19 +178,24 @@ const Profile = () => {
               <div className="profile__page__batch__display">
                 {batchInfo.map((ele, index) => {
                   return (
-                    <NavLink
-                    exact
-                    activeClassName="current"
-                    to={`/dashboard/profile/batch/${ele.batchName}`}
-                  >
                     <Card fluid color='green' style={cardStyle}>
                       <Card.Content header={ele.batchName} />
                       <Card.Content>
                         <p>Form Link : {ele.link}</p>
                         <p>Registered Student : {ele.size}</p>
+                        <Button icon="trash" warning floated="right" onClick={() => deleteBatch(ele.batchName)} />
+                        <NavLink
+                         exact
+                         activeClassName="current"
+                         to={`/dashboard/profile/batch/${ele.batchName}`}
+                        >
+                        <Button warning floated="right">
+                          <Icon name="user" />
+                          students
+                        </Button>
+                        </NavLink>
                       </Card.Content>
                     </Card>
-                  </NavLink>
                   );}
                 )}
               </div>

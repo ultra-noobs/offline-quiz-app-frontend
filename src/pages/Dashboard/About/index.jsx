@@ -1,6 +1,6 @@
 import React from 'react'
 import HamburgerMenu from "../../../components/HamburgerMenu/index"
-import {Container,Divider,Header} from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 import "./About.scss"
 
 const About = () => {
