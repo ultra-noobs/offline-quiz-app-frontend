@@ -25,13 +25,17 @@ const Edit = () => {
         setCount(count + 1);
     }
     const buttonStyle = { marginTop: "15px" }
-
+    const setQuestion = (index,e) =>{
+        let questions = [...previousQuestion];
+        questions[index][e.target.name] = e.target.value;
+        setPreviousQuestion(questions);
+    }
     const showPreviousQuestion = () => previousQuestion.map((ele, index) =>
         <Form.Field >
             <label style={buttonStyle}>Question: {index}</label>
-            <input style={buttonStyle} placeholder="Enter your question" value={ele.question} name={"question" + index} id={"question"} />
+            <input style={buttonStyle} placeholder="Enter your question" onChange={(e)=>setQuestion(index,e)} value={ele.question} name="question"  id={"question"} />
             <label style={buttonStyle}> Add options for question : {index} </label>
-            <input style={buttonStyle} placeholder="a)option1 b)option2 c)option3" value={ele.answer} name={"options" + index} id={"answer"} />
+            <input style={buttonStyle} placeholder="a)option1 b)option2 c)option3" onChange={(e)=>setQuestion(index,e)} value={ele.answer} name="answer" id={"answer"} />
         </Form.Field>
     );
 
