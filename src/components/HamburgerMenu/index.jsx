@@ -10,15 +10,16 @@ import {
   Button,
 } from 'semantic-ui-react'
 import { NavLink } from "react-router-dom"
+import useToken from "../../utils/customHooks/token"
 // import useToken from "../../utils/customHooks/token";
 
 const BurgerMenu = (props) => {
   const [visible, setVisible] = useState(false)
   const history = useHistory();
-  // const { removeToken } = useToken();
+  const { removeToken } = useToken();
 
   const logoutUser = () => {
-    // removeToken();
+    removeToken();
     history.push('/');
   }
 
