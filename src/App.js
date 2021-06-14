@@ -32,7 +32,6 @@ const App = () => {
             <Route exact path="/dashboard/edit/:id" component={Edit} />
             <Route exact path="/dashboard/profile/batch/:batchid" component={ResponseTable} />
             <Route exact path="/formRegister/:token/:batch" component={FormRegisteration} />
-            <Route exact path="/dashboard/About" component={About}/>
           </Switch>
       </Router>
     </div>

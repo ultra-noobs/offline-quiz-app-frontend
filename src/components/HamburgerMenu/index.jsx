@@ -68,12 +68,6 @@ const BurgerMenu = (props) => {
                 Profile
               </Menu.Item>
               </NavLink>
-              <NavLink exact activeClassName="current" to={`/dashboard/about`}>
-                <Menu.Item as='a'>
-                    <Icon name='search' />
-                  About
-                </Menu.Item>
-              </NavLink>
 
               <Menu.Item as='a' onClick={() => logoutUser()}>
                     <Icon name='power' />
