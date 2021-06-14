@@ -1,6 +1,6 @@
 import "./Response.scss";
 import { React, useEffect, useState } from "react";
-import { Icon, Label, Menu, Table, Container, Header } from "semantic-ui-react";
+import { Table, Container, Header } from "semantic-ui-react";
 import { useLocation, Redirect } from "react-router-dom"
 import useToken from '../../../../utils/customHooks/token'
 import useAuthStatus from '../../../../utils/customHooks/user'
@@ -16,23 +16,25 @@ const ResponseTable = () => {
     const [ batchno, setbatchno ] = useState('');
     const [ currentBatch, setcurrentBatch ] = useState([{}]);
     
-    useEffect( async () => {
+    useEffect( () => {
       let documentId = location.pathname.substr(25, location.pathname.length - 25);
       let endpoint = "http://localhost:5000/profile/batch/" + documentId;
 
       const token = getToken();
-        const response = await Axios.get(endpoint, {
+        Axios.get(endpoint, {
             headers:{
                 Authorization: token,
             }
-        });
-
+        }).then((response) => {
         setcurrentBatch(response.data[0].students);
         setbatchno(response.data[0].name);
-        const isAuthenticated = await getStatus();
-        setAuth(isAuthenticated);
-        setLoading(false);
-    },[])
+        })
+
+      getStatus().then((response) => { 
+        setAuth(response) 
+        setLoading(false)
+      })
+    },[getToken, getStatus, location.pathname])
 
   return (
       <Container>

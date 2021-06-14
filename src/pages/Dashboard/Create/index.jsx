@@ -18,6 +18,7 @@ const Create = () => {
     const incrementAndRender = () => {
         questionsInput.push(questionCount);
         setquestionCount(questionCount + 1);
+        setquestionsInput(questionsInput);
     }
 
     const { getToken } = useToken();
@@ -40,9 +41,10 @@ const Create = () => {
             i++;
         });
 
+        setquestionAndAnswers(questionAndAnswers);
         const finalQnA = questionAndAnswers.filter(element => !!element.value || !!element.answer);
         console.log(questionAndAnswers);
-        const response = await Axios.post(
+        await Axios.post(
             'http://localhost:5000/dashboard/saveQuiz',
             {
                 finalQnA,
@@ -60,18 +62,20 @@ const Create = () => {
         history.push('/dashboard')
     }
 
-    useEffect( async () => {
+    useEffect(() => {
         const token = getToken();
         let endpoint = 'http://localhost:5000/dashboard/quizbatches'
-        const response = await Axios.get(endpoint,{
+        Axios.get(endpoint,{
             headers: {
                 Authorization: token,
             },
+        }).then((response) => {
+            console.log(response);
+        setBatches(response.data)
         })
 
-        console.log(response);
-        setBatches(response.data)
-    },[])
+        // console.log(response);
+    },[getToken])
 
     const setDateAndTimeAndTitle = (e) => {
         setQuizDateAndTimeAndTitleAndBatch({

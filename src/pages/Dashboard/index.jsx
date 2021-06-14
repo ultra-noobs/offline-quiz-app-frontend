@@ -5,7 +5,7 @@ import {
   Header,
 } from "semantic-ui-react";
 import Card from "../../components/Card/index";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import useAuthStatus from "../../utils/customHooks/user";
 import HamburgerMenu from "../../components/HamburgerMenu/index";
 import Loader from '../../components/Loader/index'
@@ -21,22 +21,22 @@ const Dashboard = () => {
 
   const { getToken } = useToken();
 
-  useEffect(async () => {
+  useEffect(() => {
     const token = getToken();
     const quizEndPoint = 'http://localhost:5000/dashboard';
 
-    const response = await Axios.get(quizEndPoint, {
+    Axios.get(quizEndPoint, {
       headers: {
         Authorization: token,
       }
-    });
-    setQuizes(response.data)
-    console.log(response.data);
-    const isAuthenticated = await getStatus();
-    setAuth(isAuthenticated);
-    setLoading(false);
-
-  }, []);
+    }).then((response) => {
+      setQuizes(response.data)
+      getStatus().then((status) =>{
+        setAuth(status);
+        setLoading(false);
+      })
+    })
+  }, [getStatus, getToken]);
 
   const rowPositon = { paddingTop: "15px" };
   return (

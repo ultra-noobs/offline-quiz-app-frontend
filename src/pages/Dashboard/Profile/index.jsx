@@ -9,11 +9,12 @@ import {
   Form,
 } from "semantic-ui-react";
 import { Redirect, NavLink } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Axios from 'axios';
 import useToken from '../../../utils/customHooks/token'
 import HamburgerMenu from '../../../components/HamburgerMenu/index'
 import Loader from '../../../components/Loader/index'
+import React from "react"
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -63,7 +64,7 @@ const Profile = () => {
   };
 
   const deleteBatch = async (batchId) => {
-    const response = await Axios.get('http://localhost:5000/profile/batch/delete/' + batchId, {
+   await Axios.get('http://localhost:5000/profile/batch/delete/' + batchId, {
       headers: {
         Authorization: token
       }
@@ -71,17 +72,30 @@ const Profile = () => {
     window.location.reload();
   }
 
-  const fetchBatch = async () => {
-    const response = await Axios.get(
+  // useCallback(() => {
+    // const fetchBatch = async () => {
+    //   const response = await Axios.get(
+    //     'http://localhost:5000/profile/getBatch',
+    //     {
+    //       headers: {
+    //         Authorization: token
+    //       }
+    //     }
+    //   )
+    //   setBatchInfo(response.data.batch);
+    // }
+  // })
+
+const fetchBatch = useCallback(() => {
+    Axios.get(
       'http://localhost:5000/profile/getBatch',
       {
         headers: {
           Authorization: token
         }
       }
-    )
-    setBatchInfo(response.data.batch);
-  }
+    ).then((response) => setBatchInfo(response.data.batch))
+}, [token])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,7 +117,7 @@ const Profile = () => {
     }
     fetchData();
     fetchBatch();
-  }, [])
+  }, [fetchBatch, token])
 
   return (
     <div>

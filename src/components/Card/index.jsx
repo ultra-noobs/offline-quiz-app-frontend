@@ -1,7 +1,7 @@
 import "./Card.scss"
 import React from 'react'
 import { useHistory } from "react-router"
-import { Card, Icon, Label, Button } from 'semantic-ui-react'
+import { Card, Label, Button } from 'semantic-ui-react'
 import Axios from 'axios'
 import useToken from "../../utils/customHooks/token"
 import { NavLink } from "react-router-dom"
@@ -15,7 +15,7 @@ const CardReactComponent = (props) => {
     const token = getToken();
     const endpoint = 'http://localhost:5000/dashboard/delete/' + quizId;
     try {
-    const response = await Axios.get(endpoint,{
+    await Axios.get(endpoint,{
       headers: {
         Authorization: token,
       }});

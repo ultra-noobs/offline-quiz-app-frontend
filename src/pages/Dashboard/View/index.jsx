@@ -20,20 +20,23 @@ const View = () => {
   const token = getToken();
   const [err,setError] = useState(false);
   const [open,setOpen] = useState(false);
-  
-  useEffect(async () => {
+
+  useEffect(() => {
     let endpoint = "http://localhost:5000/dashboard/view/" + id;
 
-    const response = await Axios.get(endpoint, {
+    Axios.get(endpoint, {
       headers: {
         Authorization: token,
       }
-    });
-    setCurrentQuiz(response.data);
-    const isAuthenticated = await getStatus();
-    setAuth(isAuthenticated);
-    setLoading(false);
-  }, [])
+    }).then((response) => {
+      setCurrentQuiz(response.data);
+      getStatus()
+      .then((response) => {
+        setAuth(response);
+        setLoading(false);
+      })
+    })
+  }, [getStatus, id, token])
 
   const closeDialog = ()=>{
     setOpen(false);

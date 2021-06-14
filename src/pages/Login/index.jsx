@@ -36,7 +36,7 @@ const LoginForm = () => {
         setLoading(false);
      }
      checkStatus();
-  },[])
+  },[getStatus])
 
   const sendData = async () => {
     const { email, password } = userInfo;

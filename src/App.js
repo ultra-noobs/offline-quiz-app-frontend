@@ -3,9 +3,9 @@ import Login from './pages/Login/index'
 import Register from './pages/Signup/index'
 import Dashboard from './pages/Dashboard/index'
 import Create from './pages/Dashboard/Create/index'
+import AboutUs from './pages/Dashboard/About/index'
 import FormRegisteration from './pages/Dashboard/Form/index'
 import View from './pages/Dashboard/View/index'
-import Header from './components/Navigation/index'
 import Profile from './pages/Dashboard/Profile/index'
 import ResponseTable from './pages/Dashboard/Profile/Reponses/index'
 import About from './pages/Dashboard/About/index'
@@ -20,10 +20,10 @@ const App = () => {
     <div>
       <Router>
           <Switch>
-            {/* <Header /> */}
             <Route exact path="/" component={FrontPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/create" component={Create} />
             <Route exact path="/dashboard/profile" component={Profile} />
