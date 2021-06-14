@@ -66,7 +66,8 @@ const Edit = () => {
                 time: quizDateAndTimeAndTitleAndBatch.time,
                 date: quizDateAndTimeAndTitleAndBatch.date,
                 title: quizDateAndTimeAndTitleAndBatch.title,
-                batch: quizDateAndTimeAndTitleAndBatch.batch
+                batch: quizDateAndTimeAndTitleAndBatch.batch,
+                isCirculated:false
             }
             const response = await Axios.put(
                 `http://localhost:5000/dashboard/updateQuiz/${id}`,
