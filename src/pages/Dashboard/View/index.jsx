@@ -20,6 +20,7 @@ const View = () => {
   const token = getToken();
   const [err,setError] = useState(false);
   const [open,setOpen] = useState(false);
+  
   useEffect(async () => {
     let endpoint = "http://localhost:5000/dashboard/view/" + id;
 

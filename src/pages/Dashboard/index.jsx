@@ -31,7 +31,7 @@ const Dashboard = () => {
       }
     });
     setQuizes(response.data)
-
+    console.log(response.data);
     const isAuthenticated = await getStatus();
     setAuth(isAuthenticated);
     setLoading(false);
@@ -51,15 +51,9 @@ const Dashboard = () => {
               {quizes.map((ele, index) => {
                 return (
                   <Grid.Column style={rowPositon}>
-                    <NavLink
-                      exact
-                      activeClassName="current"
-                      to={`/dashboard/view/${ele.id}`}
-                    >
                       <Card
                       quizInfo = {ele} 
                       />
-                    </NavLink>
                   </Grid.Column>
                 );
               })}

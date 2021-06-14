@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import "./HamburgerMenu.scss"
+import { useHistory } from "react-router"
 import {
   Grid,
   Icon,
@@ -9,10 +10,17 @@ import {
   Button,
 } from 'semantic-ui-react'
 import { NavLink } from "react-router-dom"
-
+import useToken from "../../utils/customHooks/token";
 
 const BurgerMenu = (props) => {
   const [visible, setVisible] = useState(false)
+  const history = useHistory();
+  const { removeToken } = useToken();
+
+  const logoutUser = () => {
+    // removeToken();
+    history.push('/');
+  }
 
   return (
     <div className="container">
@@ -66,6 +74,11 @@ const BurgerMenu = (props) => {
                   About
                 </Menu.Item>
               </NavLink>
+
+              <Menu.Item as='a' onClick={() => logoutUser()}>
+                    <Icon name='power' />
+                  Logout 
+              </Menu.Item>
                 
               </Sidebar>
 

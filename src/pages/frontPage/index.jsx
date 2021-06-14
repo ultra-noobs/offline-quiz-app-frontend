@@ -5,6 +5,7 @@ import * as content from "../../contents/content.json"
 import { Button } from 'semantic-ui-react'
 import useAuthStatus from "../../utils/customHooks/user";
 import Navbar from "../../components/Navigation/index"
+import Loader from '../../components/Loader/index'
 
 const FrontPage = () => {
     const { getStatus } = useAuthStatus();
@@ -21,7 +22,7 @@ const FrontPage = () => {
     }, [])
     return (
         <div>
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <Loader />}
             {!isLoading && auth && <Redirect to='/dashboard' />}
             {!isLoading && !auth &&
                 <div>

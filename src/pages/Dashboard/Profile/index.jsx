@@ -62,6 +62,15 @@ const Profile = () => {
     });
   };
 
+  const deleteBatch = async (batchId) => {
+    const response = await Axios.get('http://localhost:5000/profile/batch/delete/' + batchId, {
+      headers: {
+        Authorization: token
+      }
+    });
+    window.location.reload();
+  }
+
   const fetchBatch = async () => {
     const response = await Axios.get(
       'http://localhost:5000/profile/getBatch',
@@ -155,19 +164,24 @@ const Profile = () => {
               <div className="profile__page__batch__display">
                 {batchInfo.map((ele, index) => {
                   return (
-                    <NavLink
-                    exact
-                    activeClassName="current"
-                    to={`/dashboard/profile/batch/${ele.batchName}`}
-                  >
                     <Card fluid color='green' style={cardStyle}>
                       <Card.Content header={ele.batchName} />
                       <Card.Content>
                         <p>Form Link : {ele.link}</p>
                         <p>Registered Student : {ele.size}</p>
+                        <Button icon="trash" warning floated="right" onClick={() => deleteBatch(ele.batchName)} />
+                        <NavLink
+                         exact
+                         activeClassName="current"
+                         to={`/dashboard/profile/batch/${ele.batchName}`}
+                        >
+                        <Button warning floated="right">
+                          <Icon name="user" />
+                          students
+                        </Button>
+                        </NavLink>
                       </Card.Content>
                     </Card>
-                  </NavLink>
                   );}
                 )}
               </div>
