@@ -23,19 +23,20 @@ const Dashboard = () => {
 
   useEffect(async () => {
     const token = getToken();
-    const quizEndPoint = 'http://localhost:5000/dashboard';
-
-    const response = await Axios.get(quizEndPoint, {
-      headers: {
-        Authorization: token,
-      }
-    });
-    setQuizes(response.data)
-
     const isAuthenticated = await getStatus();
     setAuth(isAuthenticated);
-    setLoading(false);
-
+    if(!isAuthenticated){
+      setLoading(false);
+    }else{
+      const quizEndPoint = 'http://localhost:5000/dashboard';
+      const response = await Axios.get(quizEndPoint, {
+        headers: {
+          Authorization: token,
+        }
+      });
+      setQuizes(response.data)
+      setLoading(false);
+    }
   }, []);
 
   const rowPositon = { paddingTop: "15px" };

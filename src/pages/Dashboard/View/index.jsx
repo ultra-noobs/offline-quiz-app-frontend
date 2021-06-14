@@ -59,6 +59,10 @@ const View = () => {
     }
   }
 
+  const editQuiz = ()=>{
+    history.push(`/dashboard/edit/${id}`);
+  }
+
   return (
     <HamburgerMenu>
       <div>
@@ -66,7 +70,7 @@ const View = () => {
         {!isLoading && !auth && <Redirect to="/login" />}
         {!isLoading && auth && (
           <Container>
-            <h2 className="heading">{currentQuiz.title}<Button floated="right" >Edit</Button><Button floated="right" onClick={circulateQuiz} >Circulate</Button> </h2>
+            <h2 className="heading">{currentQuiz.title}<Button floated="right" onClick={editQuiz} >Edit</Button><Button floated="right" onClick={circulateQuiz} >Circulate</Button> </h2>
             <span>Time : {currentQuiz.time}, Date : {currentQuiz.date}, Batch: {currentQuiz.batch}</span>
             <Divider />
             {renderQuestions()}

@@ -3,6 +3,7 @@ import Login from './pages/Login/index'
 import Register from './pages/Signup/index'
 import Dashboard from './pages/Dashboard/index'
 import Create from './pages/Dashboard/Create/index'
+import Edit from './pages/Dashboard/Edit/index'
 import FormRegisteration from './pages/Dashboard/Form/index'
 import View from './pages/Dashboard/View/index'
 import Header from './components/Navigation/index'
@@ -28,6 +29,7 @@ const App = () => {
             <Route exact path="/dashboard/create" component={Create} />
             <Route exact path="/dashboard/profile" component={Profile} />
             <Route exact path="/dashboard/view/:id" component={View} />
+            <Route exact path="/dashboard/edit/:id" component={Edit} />
             <Route exact path="/dashboard/profile/batch/:batchid" component={ResponseTable} />
             <Route exact path="/formRegister/:token/:batch" component={FormRegisteration} />
             <Route exact path="/dashboard/About" component={About}/>
