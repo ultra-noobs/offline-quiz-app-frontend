@@ -21,23 +21,22 @@ const Dashboard = () => {
 
   const { getToken } = useToken();
 
-  useEffect(async() => {
+  useEffect(() => {
     const token = getToken();
-    const isAuthenticated = await getStatus();
-    setAuth(isAuthenticated);
-    if(!isAuthenticated){
-      setLoading(false);
-    }else{
-      const quizEndPoint = 'http://localhost:5000/dashboard';
-      const response = await Axios.get(quizEndPoint, {
-        headers: {
-          Authorization: token,
-        }
-      });
+    const quizEndPoint = 'http://localhost:5000/dashboard';
+
+    Axios.get(quizEndPoint, {
+      headers: {
+        Authorization: token,
+      }
+    }).then((response) => {
       setQuizes(response.data)
-      setLoading(false);
-    }
-  }, []);
+      getStatus().then((status) =>{
+        setAuth(status);
+        setLoading(false);
+      })
+    })
+  }, [getStatus, getToken]);
 
   const rowPositon = { paddingTop: "15px" };
   return (
