@@ -12,7 +12,7 @@ const Create = () => {
     const [ questionCount, setquestionCount ] = useState(0);
     const [ questionsInput, setquestionsInput ] = useState([]);
     const [ questionAndAnswers, setquestionAndAnswers ] = useState([{ question:'', answer: '' }]);
-    const [ quizDateAndTimeAndTitleAndBatch, setQuizDateAndTimeAndTitleAndBatch ] = useState({date: '', time: '', title: '', batch: ''})
+    const [ quizDateAndTimeAndTitleAndBatch, setQuizDateAndTimeAndTitleAndBatch ] = useState({date: '', time: '', title: '', batch: '', endtime: ''})
     const [ batches, setBatches ] = useState([]);
 
     const incrementAndRender = () => {
@@ -51,6 +51,7 @@ const Create = () => {
                 time: quizDateAndTimeAndTitleAndBatch.time,
                 date: quizDateAndTimeAndTitleAndBatch.date,
                 title: quizDateAndTimeAndTitleAndBatch.title,
+                endtime: quizDateAndTimeAndTitleAndBatch.endtime,
                 batch: quizDateAndTimeAndTitleAndBatch.batch
             },
             {
@@ -75,7 +76,7 @@ const Create = () => {
         })
 
         // console.log(response);
-    },[getToken])
+    },[])
 
     const setDateAndTimeAndTitle = (e) => {
         setQuizDateAndTimeAndTitleAndBatch({
@@ -105,8 +106,9 @@ const Create = () => {
                     <label style={buttonStyle}>Select quiz batch </label> <br />
                     <Dropdown floated="right" clearable options={batches} name="batch" selection onChange={(e, data) => handleBatchSelection(e, data)} /> <br /> 
                     <label style={buttonStyle}>Enter quiz timing </label>
-                    <input style={buttonStyle} name="date" onChange={(e) => setDateAndTimeAndTitle(e)} type="date"></input>
-                    <input style={buttonStyle} name="time" onChange={(e) => setDateAndTimeAndTitle(e)} type="time"></input> 
+                    <input style={buttonStyle} name="date" placeholder="Ebter quiz date" onChange={(e) => setDateAndTimeAndTitle(e)} type="date"></input>
+                    <input style={buttonStyle} name="time" placeholder="Enter quiz start time" onChange={(e) => setDateAndTimeAndTitle(e)} type="time"></input> 
+                    <input style={buttonStyle} name="endtime" placeholder="Enter quiz end time" onChange={(e) => setDateAndTimeAndTitle(e)} type="time"></input> 
                     {renderQuestionInput()}
                 </Form>
                 <Button icon style={buttonStyle} labelPosition='left' floated="right" onClick={() => incrementAndRender()}>

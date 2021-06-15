@@ -34,13 +34,13 @@ const ResponseTable = () => {
         setAuth(response) 
         setLoading(false)
       })
-    },[getToken, getStatus, location.pathname])
+    },[])
 
   return (
       <Container>
     {isLoading && <Loader />}
       {!isLoading && !auth && <Redirect to="/login" />}
-      {!isLoading && auth && (<div onClick={() => test()}>
+      {!isLoading && auth && (<div>
           <Header as="h1">Students of batch {batchno}</Header>
     <Table celled>
       <Table.Header>

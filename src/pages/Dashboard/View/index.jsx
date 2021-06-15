@@ -29,6 +29,7 @@ const View = () => {
         Authorization: token,
       }
     }).then((response) => {
+      console.log(response.data)
       setCurrentQuiz(response.data);
       getStatus()
       .then((response) => {
@@ -36,7 +37,7 @@ const View = () => {
         setLoading(false);
       })
     })
-  }, [getStatus, id, token])
+  }, [])
 
   const closeDialog = ()=>{
     setOpen(false);
@@ -75,7 +76,7 @@ const View = () => {
         {!isLoading && auth && (
           <Container>
             <h2 className="heading">{currentQuiz.title}<Button floated="right" onClick={editQuiz} >Edit</Button><Button floated="right" onClick={circulateQuiz} >Circulate</Button> </h2>
-            <span>Time : {currentQuiz.time}, Date : {currentQuiz.date}, Batch: {currentQuiz.batch}</span>
+            <span>StartTime : {currentQuiz.time}, Endtime: {currentQuiz.endtime}, Date : {currentQuiz.date}, Batch: {currentQuiz.batch}</span>
             <Divider />
             {renderQuestions()}
             <Modal

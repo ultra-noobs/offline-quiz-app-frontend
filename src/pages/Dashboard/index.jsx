@@ -36,7 +36,7 @@ const Dashboard = () => {
         setLoading(false);
       })
     })
-  }, [getStatus, getToken]);
+  }, []);
 
   const rowPositon = { paddingTop: "15px" };
   return (
