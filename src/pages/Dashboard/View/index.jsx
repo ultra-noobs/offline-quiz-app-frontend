@@ -76,7 +76,7 @@ const View = () => {
         {!isLoading && auth && (
           <Container>
             <h2 className="heading">{currentQuiz.title}<Button floated="right" onClick={editQuiz} >Edit</Button><Button floated="right" onClick={circulateQuiz} >Circulate</Button> </h2>
-            <span>StartTime : {currentQuiz.time}, Endtime: {currentQuiz.endtime}, Date : {currentQuiz.date}, Batch: {currentQuiz.batch}</span>
+            <span>StartTime : {currentQuiz.time}, Endtime: {currentQuiz.endtime}, Date : {currentQuiz.date}, Batch: {currentQuiz.batch}, Responses no: {currentQuiz.phno}</span>
             <Divider />
             {renderQuestions()}
             <Modal

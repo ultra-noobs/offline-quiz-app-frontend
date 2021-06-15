@@ -34,6 +34,7 @@ const CardReactComponent = (props) => {
       <p>Date: {data.date}</p>
       <p>StartTime: {data.time}</p>
       <p>EndTime: {data.endtime}</p>
+      <p>Responses: {data.phno}</p>
       <Button icon="trash" primary floated="right" onClick={() => deleteQuiz(id)} />
       <NavLink
         exact
