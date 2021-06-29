@@ -43,7 +43,7 @@ const Profile = () => {
           }
         }
       )
-      setLink(`http://localhost:3000/formRegister/${response.data.token}/${currentInfo.batchno}`)
+      setLink(`https://offquiz-app.netlify.app/formRegister/${response.data.token}/${currentInfo.batchno}`)
       setLinkBox(true);
       fetchBatch();
     } catch (error) {
