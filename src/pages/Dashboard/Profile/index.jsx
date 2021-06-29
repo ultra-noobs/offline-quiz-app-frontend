@@ -35,7 +35,7 @@ const Profile = () => {
     if(!currentInfo.batchno.trim()) return;
     try {
       const response = await Axios.post(
-        "http://localhost:5000/profile/setbatch",
+        "https://peaceful-island-93608.herokuapp.com/profile/setbatch",
         currentInfo,
         {
           headers: {
@@ -64,7 +64,7 @@ const Profile = () => {
   };
 
   const deleteBatch = async (batchId) => {
-   await Axios.get('http://localhost:5000/profile/batch/delete/' + batchId, {
+   await Axios.get('https://peaceful-island-93608.herokuapp.com/profile/batch/delete/' + batchId, {
       headers: {
         Authorization: token
       }
@@ -75,7 +75,7 @@ const Profile = () => {
   // useCallback(() => {
     // const fetchBatch = async () => {
     //   const response = await Axios.get(
-    //     'http://localhost:5000/profile/getBatch',
+    //     'https://peaceful-island-93608.herokuapp.com/profile/getBatch',
     //     {
     //       headers: {
     //         Authorization: token
@@ -88,7 +88,7 @@ const Profile = () => {
 
 const fetchBatch = useCallback(() => {
     Axios.get(
-      'http://localhost:5000/profile/getBatch',
+      'https://peaceful-island-93608.herokuapp.com/profile/getBatch',
       {
         headers: {
           Authorization: token
@@ -101,7 +101,7 @@ const fetchBatch = useCallback(() => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          'http://localhost:5000/profile',
+          'https://peaceful-island-93608.herokuapp.com/profile',
           {
             headers: {
               Authorization: token,

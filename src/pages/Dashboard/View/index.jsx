@@ -22,7 +22,7 @@ const View = () => {
   const [open,setOpen] = useState(false);
 
   useEffect(() => {
-    let endpoint = "http://localhost:5000/dashboard/view/" + id;
+    let endpoint = "https://peaceful-island-93608.herokuapp.com/dashboard/view/" + id;
 
     Axios.get(endpoint, {
       headers: {
@@ -50,7 +50,7 @@ const View = () => {
   const circulateQuiz = async () => {
     try {
       const response = await Axios.get(
-        `http://localhost:5000/dashboard/circulate/${id}`,
+        `https://peaceful-island-93608.herokuapp.com/dashboard/circulate/${id}`,
        {
         headers: {
           Authorization: token,

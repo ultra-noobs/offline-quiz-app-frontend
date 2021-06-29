@@ -13,7 +13,7 @@ const CardReactComponent = (props) => {
   const { getToken } = useToken();
   const deleteQuiz = async (quizId) => {
     const token = getToken();
-    const endpoint = 'http://localhost:5000/dashboard/delete/' + quizId;
+    const endpoint = 'https://peaceful-island-93608.herokuapp.com/dashboard/delete/' + quizId;
     try {
     await Axios.get(endpoint,{
       headers: {

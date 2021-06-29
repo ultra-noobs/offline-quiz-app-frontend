@@ -76,7 +76,7 @@ const Edit = () => {
                 isCirculated:false
             }
             const response = await Axios.put(
-                `http://localhost:5000/dashboard/updateQuiz/${id}`,
+                `https://peaceful-island-93608.herokuapp.com/dashboard/updateQuiz/${id}`,
                 {quizInfo},
                 {
                     headers: {
@@ -96,7 +96,7 @@ const Edit = () => {
         if (!isAuthenticated) {
             setLoading(false);
         } else {
-            let endpoint = "http://localhost:5000/dashboard/editInfo/" + id;
+            let endpoint = "https://peaceful-island-93608.herokuapp.com/dashboard/editInfo/" + id;
             let response = await Axios.get(endpoint, {
                 headers: {
                     Authorization: token,

@@ -52,7 +52,7 @@ const Create = () => {
         const finalQnA = questionAndAnswers.filter(element => !!element.value || !!element.answer);
         console.log(questionAndAnswers);
         await Axios.post(
-            'http://localhost:5000/dashboard/saveQuiz', {
+            'https://peaceful-island-93608.herokuapp.com/dashboard/saveQuiz', {
                 finalQnA,
                 time: quizDateAndTimeAndTitleAndBatch.time,
                 date: quizDateAndTimeAndTitleAndBatch.date,
@@ -72,7 +72,7 @@ const Create = () => {
 
     useEffect(() => {
         const token = getToken();
-        let endpoint = 'http://localhost:5000/dashboard/quizbatches'
+        let endpoint = 'https://peaceful-island-93608.herokuapp.com/dashboard/quizbatches'
         Axios.get(endpoint,{
             headers: {
                 Authorization: token,

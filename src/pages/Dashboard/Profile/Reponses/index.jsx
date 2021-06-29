@@ -18,7 +18,7 @@ const ResponseTable = () => {
     
     useEffect( () => {
       let documentId = location.pathname.substr(25, location.pathname.length - 25);
-      let endpoint = "http://localhost:5000/profile/batch/" + documentId;
+      let endpoint = "https://peaceful-island-93608.herokuapp.com/profile/batch/" + documentId;
 
       const token = getToken();
         Axios.get(endpoint, {
