@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./Create.scss";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 import {
   Icon,
   Button,
@@ -79,10 +80,10 @@ const Create = () => {
       "https://peaceful-island-93608.herokuapp.com/dashboard/saveQuiz",
       {
         finalQnA,
-        time: quizDateAndTimeAndTitleAndBatch.time,
+        time: moment(quizDateAndTimeAndTitleAndBatch.time, "h:mm A", true).isValid() ?  moment(quizDateAndTimeAndTitleAndBatch.time, ["h:mm A"]).format("HH:mm"): quizDateAndTimeAndTitleAndBatch.time,
         date: quizDateAndTimeAndTitleAndBatch.date,
         title: quizDateAndTimeAndTitleAndBatch.title,
-        endtime: quizDateAndTimeAndTitleAndBatch.endtime,
+        endtime: moment(quizDateAndTimeAndTitleAndBatch.endtime, "h:mm A", true).isValid() ?  moment(quizDateAndTimeAndTitleAndBatch.endtime, ["h:mm A"]).format("HH:mm"): quizDateAndTimeAndTitleAndBatch.endtime,
         batch: quizDateAndTimeAndTitleAndBatch.batch,
         phno: quizDateAndTimeAndTitleAndBatch.phno,
       },
