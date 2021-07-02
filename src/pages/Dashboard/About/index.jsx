@@ -1,7 +1,9 @@
 import React from "react";
-import { Divider } from "semantic-ui-react";
+import { Divider, Header, Button, Container } from "semantic-ui-react";
 import "./About.scss";
 import Navbar from "../../../components/Navigation";
+
+const margin = { marginBottom: "10%" };
 
 const About = () => {
   return (
@@ -78,6 +80,17 @@ const About = () => {
               application.
             </li>
           </ul>
+          <Header as="h1" textAlign="center">
+            Download our app
+          </Header>
+          <Container textAlign="center">
+            <Button
+              content="Download"
+              icon="download"
+              labelPosition="left"
+              style={margin}
+            />
+          </Container>
         </div>
       </div>
     </div>

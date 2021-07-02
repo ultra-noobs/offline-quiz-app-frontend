@@ -9,7 +9,7 @@ import FormRegisteration from './pages/Dashboard/Form/index'
 import View from './pages/Dashboard/View/index'
 import Profile from './pages/Dashboard/Profile/index'
 import ResponseTable from './pages/Dashboard/Profile/Reponses/index'
-import DownloadPage from "./pages/Download/index.jsx";
+import DownloadPage from "./pages/Dashboard/About/index";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
