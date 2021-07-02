@@ -148,7 +148,7 @@ const Edit = () => {
                             <input style={buttonStyle} value={quizDateAndTimeAndTitleAndBatch.date} name="date" onChange={(e) => setDateAndTimeAndTitle(e)} type="date"></input>
                             <input style={buttonStyle} value={quizDateAndTimeAndTitleAndBatch.time} name="time" onChange={(e) => setDateAndTimeAndTitle(e)} type="time"></input>
                             <input style={buttonStyle} value={quizDateAndTimeAndTitleAndBatch.endtime} name="endtime" onChange={(e) => setDateAndTimeAndTitle(e)} type="time"></input>
-                            <input style={buttonStyle} value={quizDateAndTimeAndTitleAndBatch.phno} name="phno" onChange={(e) => setDateAndTimeAndTitle(e)} type="number"></input>
+                            <input style={buttonStyle} value={quizDateAndTimeAndTitleAndBatch.phno} name="phno" onChange={(e) => setDateAndTimeAndTitle(e)} type="text"></input>
                             <h3>Questions</h3>
                             {showPreviousQuestion()}
                             {renderQuestionInput()}

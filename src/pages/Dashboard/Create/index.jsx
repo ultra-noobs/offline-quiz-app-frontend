@@ -181,13 +181,13 @@ const Create = () => {
               onChange={(e) => setDateAndTimeAndTitle(e)}
               type="time"
             ></input>
-            <label style={buttonStyle}>Enter quiz end time </label>
+            <label style={buttonStyle}>Enter Phone Number </label>
             <input
               style={buttonStyle}
               name="phno"
               placeholder="Enter phone for accepting responses"
               onChange={(e) => setDateAndTimeAndTitle(e)}
-              type="number"
+              type="text"
             ></input>
             {renderQuestionInput()}
           </Form>
