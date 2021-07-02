@@ -187,7 +187,7 @@ const Create = () => {
               name="phno"
               placeholder="Enter phone for accepting responses"
               onChange={(e) => setDateAndTimeAndTitle(e)}
-              type="number"
+              type="text"
             ></input>
             {renderQuestionInput()}
           </Form>
