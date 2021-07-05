@@ -1,84 +1,118 @@
-import { React, useState,useEffect } from 'react'
-import { Button, Form, Container, Message, Header } from 'semantic-ui-react'
-import Axios from 'axios';
-import { useHistory,Redirect } from "react-router-dom";
-import './Login.scss'
+import { React, useState, useEffect } from "react";
+import {
+  Button,
+  Form,
+  Container,
+  Message,
+  Header,
+  Segment,
+  Icon,
+} from "semantic-ui-react";
+import Axios from "axios";
+import { useHistory, Redirect } from "react-router-dom";
+import "./Login.scss";
 import useAuthStatus from "../../utils/customHooks/user";
 import useToken from "../../utils/customHooks/token";
-import Navbar from "../../components/Navigation/index"
-import Loader from '../../components/Loader/index'
+import Navbar from "../../components/Navigation/index";
+import Loader from "../../components/Loader/index";
 
 const LoginForm = () => {
-
-  const labelStyle = { fontSize: "15px" }
-  const [errMessage, seterrMessage ] = useState('');
-  const [userInfo , setUserInfo] = useState({
+  const labelStyle = { fontSize: "15px" };
+  const [errMessage, seterrMessage] = useState("");
+  const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
 
-  const {setToken} = useToken();
-  const {getStatus} = useAuthStatus();
+  const { setToken } = useToken();
+  const { getStatus } = useAuthStatus();
   const history = useHistory();
   const setInfo = (e) => {
     setUserInfo({
-        ...userInfo,
-        [e.target.name]: e.target.value  
-    })
-  }
-  var [isLoading,setLoading] = useState(true);
-  var [auth,setAuth] = useState();
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+  var [isLoading, setLoading] = useState(true);
+  var [auth, setAuth] = useState();
 
-  useEffect(()=>{
-     const checkStatus = async()=>{
-       const isAuthenticated = await getStatus();
-        setAuth(isAuthenticated);
-        setLoading(false);
-     }
-     checkStatus();
-  },[getStatus])
+  useEffect(() => {
+    const checkStatus = async () => {
+      const isAuthenticated = await getStatus();
+      setAuth(isAuthenticated);
+      setLoading(false);
+    };
+    checkStatus();
+  }, [getStatus]);
 
   const sendData = async () => {
     const { email, password } = userInfo;
     const userData = {
-        password,
-        email
-    }
+      password,
+      email,
+    };
     try {
-      const response = await Axios.post('https://peaceful-island-93608.herokuapp.com/login', userData)
+      const response = await Axios.post(
+        "https://peaceful-island-93608.herokuapp.com/login",
+        userData
+      );
       const token = response.data.token;
       const errorMessage = response.data.errorMessage;
-      if(errorMessage){
+      if (errorMessage) {
         seterrMessage(errorMessage);
-      }else{
+      } else {
         setToken(token);
-        history.push('/dashboard')
+        history.push("/dashboard");
       }
-    } catch(err) {
+    } catch (err) {
       seterrMessage(err);
     }
-  }
+  };
 
-  const formElements = [{ name: "email", placeholder: "Enter your email" },{name: "password", placeholder: "Enter password"}];
-  const renderFormElement = (name, placeholder) => <Form.Field><label className="label" style={labelStyle}>{name}</label><input type={name} name={name} onChange={(e) => setInfo(e)} placeholder={placeholder} /></Form.Field>
+  const formElements = [
+    { name: "email", placeholder: "Enter your email" },
+    { name: "password", placeholder: "Enter password" },
+  ];
+  const renderFormElement = (name, placeholder) => (
+    <Form.Field>
+      <label className="label" style={labelStyle}>
+        {name}
+      </label>
+      <input
+        type={name}
+        name={name}
+        onChange={(e) => setInfo(e)}
+        placeholder={placeholder}
+      />
+    </Form.Field>
+  );
 
   return (
     <Container>
       {isLoading && <Loader />}
-      {!isLoading && auth && <Redirect to='/dashboard' />}
-      {!isLoading && !auth && 
+      {!isLoading && auth && <Redirect to="/dashboard" />}
+      {!isLoading && !auth && (
         <div>
           <Navbar />
-          <Header as='h1'>Login</Header>
-          <Form error={!!errMessage}>  
-            {formElements.map((element, index) => renderFormElement(element.name, element.placeholder))} 
-            <Button type='submit' onClick={() => sendData()}>Login</Button>
-            <Message error header="Oops!!" content={errMessage} /> 
-          </Form>
+          <Segment>
+            <Header as="h2" icon textAlign="center">
+              <Icon name="hand peace" circular />
+              <Header.Content>Welcome Back!! 👏</Header.Content>
+            </Header>
+            <Form error={!!errMessage}>
+              {formElements.map((element, index) =>
+                renderFormElement(element.name, element.placeholder)
+              )}
+              <Button type="submit" primary onClick={() => sendData()}>
+                Login
+              </Button>
+              <Message error header="Oops!!" content={errMessage} />
+            </Form>
+          </Segment>
         </div>
-      }
+      )}
     </Container>
-  ) 
+  );
 };
 
 export default LoginForm;

@@ -45,7 +45,7 @@ const Dashboard = () => {
       {!isLoading && !auth && <Redirect to="/login" />}
       {!isLoading && auth && (
         <HamburgerMenu>
-          <Header as="h3" >Your Quizes </Header>
+          <Header as="h3" >All your quizes are visible here 🤓 </Header>
           <Grid columns="five" divided>
             <Grid.Row style={rowPositon}>
               {quizes.map((ele, index) => {

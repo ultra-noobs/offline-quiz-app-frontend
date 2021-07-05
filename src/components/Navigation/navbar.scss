@@ -19,7 +19,8 @@ nav ul.navLink{
 }
 .navLink li{
     cursor: pointer;
-    margin-left: 20px;
+    // margin-left: 20px;
+    margin-top: -20px;
 }
 .navLink li:hover{
     color: #03256c;

@@ -9,6 +9,7 @@ import {
   Header,
   Form,
   Dropdown,
+  Segment
 } from "semantic-ui-react";
 import Axios from "axios";
 import useToken from "../../../utils/customHooks/token";
@@ -127,27 +128,26 @@ const Create = () => {
     });
   };
 
-  const buttonStyle = { marginTop: "10px" };
+  const buttonStyle = { marginTop: "40px" };
 
   return (
     <div>
       <HamburgerMenu>
         <Container>
-          <Header>
-            Add Questions here
+          <Header as="h2">
+            Start creating quiz 😎
             <Button primary floated="right" onClick={() => saveAndParse()}>
               <Icon name="save" /> Save
             </Button>
           </Header>
           <Form>
-            <label>Quiz Title</label>
+            <label> <Header>Quiz Title</Header></label>
             <input
-              style={buttonStyle}
               name="title"
               onChange={(e) => setDateAndTimeAndTitle(e)}
               type="text"
             ></input>
-            <label style={buttonStyle}>Select quiz batch </label> <br />
+            <label> <Header> Select quiz batch </Header></label>
             <Dropdown
               floated="right"
               clearable
@@ -155,35 +155,30 @@ const Create = () => {
               name="batch"
               selection
               onChange={(e, data) => handleBatchSelection(e, data)}
-            />{" "}
-            <br />
-            <label style={buttonStyle}>Schedule Quiz </label>
+            />
+            <label style={buttonStyle}> <Header> Schedule Quiz </Header> </label>
             <input
-              style={buttonStyle}
               name="date"
               placeholder="Enter quiz date"
               onChange={(e) => setDateAndTimeAndTitle(e)}
               type="date"
             ></input>
-            <label style={buttonStyle}>Enter quiz start time </label>
+            <label style={buttonStyle}> <Header> Enter quiz start time </Header></label>
             <input
-              style={buttonStyle}
               name="time"
               placeholder="Enter quiz start time"
               onChange={(e) => setDateAndTimeAndTitle(e)}
               type="time"
             ></input>
-            <label style={buttonStyle}>Enter quiz end time </label>
+            <label style={buttonStyle}> <Header> Enter quiz end time </Header></label>
             <input
-              style={buttonStyle}
               name="endtime"
               placeholder="Enter quiz end time"
               onChange={(e) => setDateAndTimeAndTitle(e)}
               type="time"
             ></input>
-            <label style={buttonStyle}>Enter Phone Number </label>
+            <label style={buttonStyle}><Header>  Enter Phone Number </Header></label>
             <input
-              style={buttonStyle}
               name="phno"
               placeholder="Enter phone for accepting responses"
               onChange={(e) => setDateAndTimeAndTitle(e)}
@@ -192,15 +187,14 @@ const Create = () => {
             {renderQuestionInput()}
           </Form>
           <Button
-            icon
+            icon = "add"
             style={buttonStyle}
             labelPosition="left"
             floated="right"
             onClick={() => incrementAndRender()}
-          >
-            <Icon name="add" />
-            Add
-          </Button>
+            content="Add"
+            color="green"
+           />
         </Container>
       </HamburgerMenu>
     </div>

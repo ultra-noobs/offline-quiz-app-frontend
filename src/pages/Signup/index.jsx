@@ -1,97 +1,135 @@
-import { useState,useEffect } from 'react'
-import { Button, Form, Container, Message, Header } from 'semantic-ui-react'
-import Axios from 'axios';
-import { useHistory,Redirect } from "react-router-dom";
-import './Signup.scss'
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Form,
+  Container,
+  Message,
+  Header,
+  Segment,
+  Icon,
+} from "semantic-ui-react";
+import Axios from "axios";
+import { useHistory, Redirect } from "react-router-dom";
+import "./Signup.scss";
 import useToken from "../../utils/customHooks/token";
 import useAuthStatus from "../../utils/customHooks/user";
-import Navbar from "../../components/Navigation/index"
-import Loader from '../../components/Loader/index'
-import 'semantic-ui-css/semantic.min.css'
+import Navbar from "../../components/Navigation/index";
+import Loader from "../../components/Loader/index";
+import "semantic-ui-css/semantic.min.css";
 
 const SignupForm = () => {
   const labelStyle = { fontSize: "15px" };
-  const formElements = [{ name: "name", placeholder: "Enter your name", type: "text" },{name: "email", placeholder: "Enter your email", type: "email"}, {name: "institution", placeholder: "Enter your institution", type: "text"}, {name: "password", placeholder: "Set password", type: "password"}, {name: "re-password", placeholder: "Re renter the password", type: "password" }];
-  const renderFormElements = () => { 
-    return formElements.map(
-      (ele, index) =>  
+  const formElements = [
+    { name: "name", placeholder: "Enter your name", type: "text" },
+    { name: "email", placeholder: "Enter your email", type: "email" },
+    {
+      name: "institution",
+      placeholder: "Enter your institution",
+      type: "text",
+    },
+    { name: "password", placeholder: "Set password", type: "password" },
+    {
+      name: "re-password",
+      placeholder: "Re renter the password",
+      type: "password",
+    },
+  ];
+  const renderFormElements = () => {
+    return formElements.map((ele, index) => (
       <Form.Field>
-        <label style={labelStyle} className="label">{ele.name}</label>
-        <input type={ele.type} name={ele.name} onChange={(e) => setInfo(e)} placeholder={ele.placeholder} />
-      </Form.Field>);
-      }
+        <label style={labelStyle} className="label">
+          {ele.name}
+        </label>
+        <input
+          type={ele.type}
+          name={ele.name}
+          onChange={(e) => setInfo(e)}
+          placeholder={ele.placeholder}
+        />
+      </Form.Field>
+    ));
+  };
 
-  const [errMessage, seterrMessage] = useState('');
-  const [userInfo , setUserInfo] = useState({
+  const [errMessage, seterrMessage] = useState("");
+  const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
     password: "",
-    institution: ""
+    institution: "",
   });
 
-  const {setToken} = useToken();
-  const {getStatus} = useAuthStatus();
+  const { setToken } = useToken();
+  const { getStatus } = useAuthStatus();
   const history = useHistory();
   const setInfo = (e) => {
     setUserInfo({
-        ...userInfo,
-        [e.target.name]: e.target.value  
-    })
-  }
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  var [isLoading,setLoading] = useState(true);
-  var [auth,setAuth] = useState();
+  var [isLoading, setLoading] = useState(true);
+  var [auth, setAuth] = useState();
 
-  useEffect(()=>{
-     const checkStatus = async()=>{
-       const isAuthenticated = await getStatus();
-        setAuth(isAuthenticated);
-        setLoading(false);
-     }
-     checkStatus();
-  },[getStatus])
+  useEffect(() => {
+    const checkStatus = async () => {
+      const isAuthenticated = await getStatus();
+      setAuth(isAuthenticated);
+      setLoading(false);
+    };
+    checkStatus();
+  }, [getStatus]);
 
   const sendData = async () => {
     const { email, password, name, institution } = userInfo;
     const userData = {
-        password,
-        email,
-        name,
-        institution
-    }
+      password,
+      email,
+      name,
+      institution,
+    };
     try {
-      const data = await Axios.post('https://peaceful-island-93608.herokuapp.com/register', userData);
+      const data = await Axios.post(
+        "https://peaceful-island-93608.herokuapp.com/register",
+        userData
+      );
       const token = data.data.token;
       const errorMessage = data.data.errorMessage;
-      if(errorMessage){
+      if (errorMessage) {
         seterrMessage(errorMessage);
-      }else{
+      } else {
         setToken(token);
-        history.push('/dashboard')
+        history.push("/dashboard");
       }
-    } catch(err) {
+    } catch (err) {
       seterrMessage(err);
     }
-    
-  }
+  };
 
-  return(
+  return (
     <Container>
       {isLoading && <Loader />}
-      {!isLoading && auth && <Redirect to='/dashboard' />}
-      {!isLoading && !auth && 
-      <div>
-        <Navbar />
-        <Header as='h1'>Register</Header>
-        <Form error={!!errMessage} > 
-          {renderFormElements()}  
-          <Button type='submit' onClick={() => sendData()}>Register</Button>  
-          <Message error header="Oops!!" content={errMessage} />
-        </Form>
-      </div>
-    }
+      {!isLoading && auth && <Redirect to="/dashboard" />}
+      {!isLoading && !auth && (
+        <div>
+          <Navbar />
+          <Segment>
+            <Header as="h2" icon textAlign="center">
+              <Icon name="address book outline" circular />
+              <Header.Content>Hello User!! 👋</Header.Content>
+            </Header>
+            <Form error={!!errMessage}>
+              {renderFormElements()}
+              <Button primary type="submit" onClick={() => sendData()}>
+                Register
+              </Button>
+              <Message error header="Oops!!" content={errMessage} />
+            </Form>
+          </Segment>
+        </div>
+      )}
     </Container>
- )
+  );
 };
 
 export default SignupForm;
