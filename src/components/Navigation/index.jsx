@@ -24,7 +24,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/aboutus">
+          <Link to="/about-us">
             <Button basic color="green">
               About Us
             </Button>

@@ -8,8 +8,7 @@ import {
   Container,
   Header,
   Form,
-  Dropdown,
-  Segment
+  Dropdown
 } from "semantic-ui-react";
 import Axios from "axios";
 import useToken from "../../../utils/customHooks/token";
@@ -110,7 +109,6 @@ const Create = () => {
       setBatches(response.data);
     });
 
-    // console.log(response);
   }, []);
 
   const setDateAndTimeAndTitle = (e) => {

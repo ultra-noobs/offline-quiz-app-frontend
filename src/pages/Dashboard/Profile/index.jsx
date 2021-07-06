@@ -84,20 +84,6 @@ const Profile = () => {
     window.location.reload();
   };
 
-  // useCallback(() => {
-  // const fetchBatch = async () => {
-  //   const response = await Axios.get(
-  //     'https://peaceful-island-93608.herokuapp.com/profile/getBatch',
-  //     {
-  //       headers: {
-  //         Authorization: token
-  //       }
-  //     }
-  //   )
-  //   setBatchInfo(response.data.batch);
-  // }
-  // })
-
   const fetchBatch = useCallback(() => {
     Axios.get("https://peaceful-island-93608.herokuapp.com/profile/getBatch", {
       headers: {

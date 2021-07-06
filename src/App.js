@@ -1,4 +1,4 @@
-import FrontPage from "./pages/frontPage/index.jsx"
+import FrontPage from "./pages/Landing/index.jsx"
 import Login from './pages/Login/index'
 import Register from './pages/Signup/index'
 import Dashboard from './pages/Dashboard/index'
@@ -13,8 +13,6 @@ import DownloadPage from "./pages/Dashboard/About/index";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
-//switch to lazy loading for pending request refer below code for syntax
-// const LoginPage = React.lazy(() => import('./pages/Login/index'))
 
 const App = () => {
   return(
@@ -24,7 +22,7 @@ const App = () => {
             <Route exact path="/" component={FrontPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/aboutus" component={AboutUs} />
+            <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/download" component={DownloadPage} />
             <Route exact path="/dashboard/create" component={Create} />

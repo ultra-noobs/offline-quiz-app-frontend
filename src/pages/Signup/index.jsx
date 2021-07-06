@@ -16,26 +16,13 @@ import useAuthStatus from "../../utils/customHooks/user";
 import Navbar from "../../components/Navigation/index";
 import Loader from "../../components/Loader/index";
 import "semantic-ui-css/semantic.min.css";
+import * as formElements from "../../contents/registration.json"
 
 const SignupForm = () => {
   const labelStyle = { fontSize: "15px" };
-  const formElements = [
-    { name: "name", placeholder: "Enter your name", type: "text" },
-    { name: "email", placeholder: "Enter your email", type: "email" },
-    {
-      name: "institution",
-      placeholder: "Enter your institution",
-      type: "text",
-    },
-    { name: "password", placeholder: "Set password", type: "password" },
-    {
-      name: "re-password",
-      placeholder: "Re renter the password",
-      type: "password",
-    },
-  ];
+
   const renderFormElements = () => {
-    return formElements.map((ele, index) => (
+    return formElements.formElement.map((ele, index) => (
       <Form.Field>
         <label style={labelStyle} className="label">
           {ele.name}

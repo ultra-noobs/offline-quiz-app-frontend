@@ -76,8 +76,7 @@ const FormRegisteration = () => {
             required
           />
           <Button primary style={{ marginTop: "10px" }} onClick={handleSubmit}>
-            {" "}
-            Submit{" "}
+            Submit
           </Button>
           {error && (
             <Message negative>

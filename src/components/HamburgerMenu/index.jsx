@@ -70,7 +70,7 @@ const BurgerMenu = (props) => {
               </Menu.Item>
               </NavLink>
 
-              <NavLink exact activeClassName="current" to={`/aboutus`}>
+              <NavLink exact activeClassName="current" to={`/about-us`}>
                 <Menu.Item as='a'>
                   <Icon name='user' />
                 About us

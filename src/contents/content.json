@@ -1,9 +1,9 @@
 {
     "content":[
         {
-            "frontPage":{
-                "TagLine1":"No More Internet Issue During The Quiz. 🤩",
-                "TagLine2":"Attempt Your Quiz Offline."
+            "landing": {
+                "header": "No More Internet Issue During The Quiz. 🤩",
+                "sub-header": "Attempt Your Quiz Offline."
             }
         }
     ]
