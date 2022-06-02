@@ -22,7 +22,7 @@ const ResponseTable = () => {
       location.pathname.length - 25
     );
     let endpoint =
-      "https://peaceful-island-93608.herokuapp.com/profile/batch/" + documentId;
+      "https://offquiz-backend.herokuapp.com/profile/batch/" + documentId;
 
     const token = getToken();
     Axios.get(endpoint, {

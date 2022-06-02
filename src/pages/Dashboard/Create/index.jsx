@@ -77,7 +77,7 @@ const Create = () => {
     );
     console.log(questionAndAnswers);
     await Axios.post(
-      "https://peaceful-island-93608.herokuapp.com/dashboard/saveQuiz",
+      "https://offquiz-backend.herokuapp.com/dashboard/saveQuiz",
       {
         finalQnA,
         time: moment(quizDateAndTimeAndTitleAndBatch.time, "h:mm A", true).isValid() ?  moment(quizDateAndTimeAndTitleAndBatch.time, ["h:mm A"]).format("HH:mm"): quizDateAndTimeAndTitleAndBatch.time,
@@ -99,7 +99,7 @@ const Create = () => {
   useEffect(() => {
     const token = getToken();
     let endpoint =
-      "https://peaceful-island-93608.herokuapp.com/dashboard/quizbatches";
+      "https://offquiz-backend.herokuapp.com/dashboard/quizbatches";
     Axios.get(endpoint, {
       headers: {
         Authorization: token,

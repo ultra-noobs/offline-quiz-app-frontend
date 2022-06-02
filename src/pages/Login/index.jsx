@@ -53,7 +53,7 @@ const LoginForm = () => {
     };
     try {
       const response = await Axios.post(
-        "https://peaceful-island-93608.herokuapp.com/login",
+        "https://offquiz-backend.herokuapp.com/login",
         userData
       );
       const token = response.data.token;

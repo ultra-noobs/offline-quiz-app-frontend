@@ -28,7 +28,7 @@ const FormRegisteration = () => {
     };
     try {
       const response = await Axios.put(
-        "https://peaceful-island-93608.herokuapp.com/addStudent",
+        "https://offquiz-backend.herokuapp.com/addStudent",
         data
       );
       const { errorMessage, success } = response.data;

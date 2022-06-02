@@ -41,7 +41,7 @@ const Profile = () => {
     if (!currentInfo.batchno.trim()) return;
     try {
       const response = await Axios.post(
-        "https://peaceful-island-93608.herokuapp.com/profile/setbatch",
+        "https://offquiz-backend.herokuapp.com/profile/setbatch",
         currentInfo,
         {
           headers: {
@@ -73,7 +73,7 @@ const Profile = () => {
 
   const deleteBatch = async (batchId) => {
     await Axios.get(
-      "https://peaceful-island-93608.herokuapp.com/profile/batch/delete/" +
+      "https://offquiz-backend.herokuapp.com/profile/batch/delete/" +
         batchId,
       {
         headers: {
@@ -85,7 +85,7 @@ const Profile = () => {
   };
 
   const fetchBatch = useCallback(() => {
-    Axios.get("https://peaceful-island-93608.herokuapp.com/profile/getBatch", {
+    Axios.get("https://offquiz-backend.herokuapp.com/profile/getBatch", {
       headers: {
         Authorization: token,
       },
@@ -96,7 +96,7 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          "https://peaceful-island-93608.herokuapp.com/profile",
+          "https://offquiz-backend.herokuapp.com/profile",
           {
             headers: {
               Authorization: token,

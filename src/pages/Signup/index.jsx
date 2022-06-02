@@ -77,7 +77,7 @@ const SignupForm = () => {
     };
     try {
       const data = await Axios.post(
-        "https://peaceful-island-93608.herokuapp.com/register",
+        "https://offquiz-backend.herokuapp.com/register",
         userData
       );
       const token = data.data.token;

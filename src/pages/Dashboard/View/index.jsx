@@ -30,7 +30,7 @@ const View = () => {
 
   useEffect(() => {
     let endpoint =
-      "https://peaceful-island-93608.herokuapp.com/dashboard/view/" + id;
+      "https://offquiz-backend.herokuapp.com/dashboard/view/" + id;
 
     Axios.get(endpoint, {
       headers: {
@@ -62,7 +62,7 @@ const View = () => {
   const circulateQuiz = async () => {
     try {
       const response = await Axios.get(
-        `https://peaceful-island-93608.herokuapp.com/dashboard/circulate/${id}`,
+        `https://offquiz-backend.herokuapp.com/dashboard/circulate/${id}`,
         {
           headers: {
             Authorization: token,

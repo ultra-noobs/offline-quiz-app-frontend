@@ -113,7 +113,7 @@ const Edit = () => {
         isCirculated: false,
       };
       const response = await Axios.put(
-        `https://peaceful-island-93608.herokuapp.com/dashboard/updateQuiz/${id}`,
+        `https://offquiz-backend.herokuapp.com/dashboard/updateQuiz/${id}`,
         { quizInfo },
         {
           headers: {
@@ -134,7 +134,7 @@ const Edit = () => {
       setLoading(false);
     } else {
       let endpoint =
-        "https://peaceful-island-93608.herokuapp.com/dashboard/editInfo/" + id;
+        "https://offquiz-backend.herokuapp.com/dashboard/editInfo/" + id;
       let response = await Axios.get(endpoint, {
         headers: {
           Authorization: token,

@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const token = getToken();
-    const quizEndPoint = 'https://peaceful-island-93608.herokuapp.com/dashboard';
+    const quizEndPoint = 'https://offquiz-backend.herokuapp.com/dashboard';
 
     Axios.get(quizEndPoint, {
       headers: {
